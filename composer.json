@@ -1,0 +1,14 @@
+{
+  "name": "vendor_name/testphpagro1.ua",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Admin",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+  }
+}
