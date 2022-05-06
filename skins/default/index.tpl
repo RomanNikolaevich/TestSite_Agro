@@ -12,7 +12,6 @@
 <body>
 <div class="block">
   <?php include './skins/'.SKIN.'/static/menu/header.tpl'; ?>
-  <?php include $_GET['module'].'/pages/'.$_GET['page'].'.tpl'; ?>
   <?php include $path; ?>
 
   <div class="conteiner-content">

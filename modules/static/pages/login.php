@@ -1,8 +1,4 @@
 <?php
-//$loginAdm = 'Roman';
-//$emailAdm = 'roma@gmail.com';
-//$passAdm = '123123';
-
 if(isset($_POST['login'], $_POST['email'], $_POST['password'], $_POST['do_login'])) {
 	if(!empty($_POST['login'])) {
 		if (!preg_match("/^[a-zA-Z]*$/", $_POST['login'])) {

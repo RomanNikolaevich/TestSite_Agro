@@ -10,7 +10,6 @@ include_once './libs/default.php';
 include_once './variables.php';
 
 // Роутер
-include './modules/static/pages/'.$_GET['page'].'.'.'php'; //контролер
 include './skins/'.SKIN.'/index.tpl'; //шаблон
 
 //include_once __DIR__ . '/vendor/autoload.php';

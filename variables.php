@@ -21,12 +21,3 @@ if(!in_array($page, $allowed)) {
 		include_once $modulePath;
 	}
 }
-
-//настройки Стаса
-if(!isset($_GET['module'])) {
-	$_GET['module'] = 'static';
-}
-
-if(!isset($_GET['page'])) {
-	$_GET['page'] = 'main';
-}
