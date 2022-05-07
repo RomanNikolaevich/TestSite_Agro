@@ -11,7 +11,7 @@ if($_SERVER['REMOTE_ADDR'] !== $adminIp && $page === 'login') {
 $path = 'skins/default/static/pages/'.$page.'.tpl';
 
 //проверка допустимых имен страниц
-$allowed = ['index', 'main', 'contacts', 'aboutus', 'partners', 'products', 'services', 'regin', 'login', 'logout', 'admin'];
+$allowed = ['index', 'main', 'contacts', 'aboutus', 'partners', 'products', 'services', 'regin', 'login', 'logout', 'admin', 'game', 'gameover'];
 if(!in_array($page, $allowed)) {
 	header("Location: /index.php?module=errors&page=404");
 	exit();

@@ -11,5 +11,5 @@ include_once './variables.php';
 
 // Роутер
 include './skins/'.SKIN.'/index.tpl'; //шаблон
-
+include_once 'modules/game/game.php';
 //include_once __DIR__ . '/vendor/autoload.php';

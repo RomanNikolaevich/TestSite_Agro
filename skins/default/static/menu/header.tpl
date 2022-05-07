@@ -10,6 +10,7 @@
 	<div class="item"><a href="index.php?page=products">products</a></div>
 	<div class="item"><a href="index.php?page=partners">partners</a></div>
 	<div class="item"><a href="index.php?page=contacts">contacts</a></div>
+	<div class="item"><a href="index.php?page=game">games</a></div>
 	<?php
 	if($adminVisability) {
 		if(empty($_SESSION['access'])) { ?>
