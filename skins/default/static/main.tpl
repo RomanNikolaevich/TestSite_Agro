@@ -1,6 +1,6 @@
 <div class="conteiner-content">
 	<div class="conteiner-content-block">
-		<img src="img/page1_img_01.png" alt="">
+		<img src="../../../img/page1_img_01.png" alt="">
 		<h3>
 			<span>PROGRESSIVE</span> METHODS
 		</h3>
@@ -12,7 +12,7 @@
 		<button class="button"></button>
 	</div>
 	<div class="conteiner-content-block">
-		<img src="img/page1_img_02.png" alt="">
+		<img src="../../../img/page1_img_02.png" alt="">
 		<h3>
 			<span>BEST</span> QUALTY PRODUCTS
 		</h3>
@@ -24,7 +24,7 @@
 		<button class="button"></button>
 	</div>
 	<div class="conteiner-content-block">
-		<img src="img/page1_img_03.png" alt="">
+		<img src="../../../img/page1_img_03.png" alt="">
 		<h3>
 			<span>100%</span> NATURAL & ORGANIC
 		</h3>
@@ -35,9 +35,7 @@
 			fertasbe.</p>
 		<button class="button"></button>
 	</div>
-
 </div>
-
 <div class="conteiner-content2">
 	<div class="conteiner-content-block2">
 		<h2>
@@ -49,7 +47,6 @@
 			<span>COMPANY</span> DEVELOPMENT
 		</h2>
 	</div>
-
 </div>
 <div class="conteiner-content">
 	<div class="conteiner-content-block4">
@@ -62,11 +59,10 @@
 			<li><a href="">TASERTO YNDOLASE MIASER LASYTRAS</a></li>
 			<li><a href="">MERTAELERAS NEORY LKAUISYASE</a></li>
 			<li><a href="">VERODE FERTASE</a></li>
-
 		</ul>
 	</div>
 	<div class="conteiner-content-block4">
-		<img src="img/page1_img_04.jpg" style="width: 100%;" alt="">
+		<img src="../../../img/page1_img_04.jpg" style="width: 100%;" alt="">
 	</div>
 	<div class="conteiner-content-block4">
 		<h2>MIERTASE VEROSERAS LERT BATRSEAS</h2>

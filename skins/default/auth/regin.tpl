@@ -18,7 +18,7 @@
 					<button class="btn btn-suc" name="do_signup" type="submit">Зарегистрировать</button>
 				</form>
 				<br>
-				<p>Если вы зарегистрированы, тогда нажмите <a href="index.php?page=login">здесь</a>.</p>
+				<p>Если вы зарегистрированы, тогда нажмите <a href="index.php?module=auth&page=login">здесь</a>.</p>
 				<p>Вернуться на <a href="index.php">главную</a>.</p>
 			</div>
 		</div>

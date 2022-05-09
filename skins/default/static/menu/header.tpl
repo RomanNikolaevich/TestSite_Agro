@@ -10,16 +10,16 @@
 	<div class="item"><a href="index.php?page=products">products</a></div>
 	<div class="item"><a href="index.php?page=partners">partners</a></div>
 	<div class="item"><a href="index.php?page=contacts">contacts</a></div>
-	<div class="item"><a href="index.php?page=game">games</a></div>
+	<div class="item"><a href="index.php?module=game&page=game">games</a></div>
 	<?php
 	if($adminVisability) {
 		if(empty($_SESSION['access'])) { ?>
-			<div class="item"><a href="index.php?page=login">login</a></div>
+			<div class="item"><a href="index.php?module=auth&page=login">login</a></div>
 			<?php
 		} ?>
 		<?php
 		if(!empty($_SESSION['access'])) { ?>
-			<div class="item"><a href="index.php?page=logout">logout</a></div>
+			<div class="item"><a href="index.php?module=auth&page=logout">logout</a></div>
 			<?php
 			if(!empty($_SESSION['login'])) {
 				echo 'welcome '.$_SESSION['login'];

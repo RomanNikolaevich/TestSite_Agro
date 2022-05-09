@@ -12,7 +12,7 @@
 <body>
 <div class="block">
   <?php include './skins/'.SKIN.'/static/menu/header.tpl'; ?>
-  <?php include $path; ?>
+  <?php include $pagePath; ?>
 
   <div class="conteiner-content">
     <?php include './skins/'.SKIN.'/static/menu/footer.tpl'; ?>

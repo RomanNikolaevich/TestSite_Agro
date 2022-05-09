@@ -2,7 +2,11 @@
 $basehp = 10;
 $letsFight = rand(1, 3);
 
-if(empty($_SESSION['server'])) {//если клиента не существует или создана новая игра
+if(empty($_SESSION['server'])) {//если клиента не существует
+	$_SESSION['client'] = $_SESSION['server'] = $basehp;
+}
+
+if(isset($_POST['newgame'])) {//если создана новая игра
 	$_SESSION['client'] = $_SESSION['server'] = $basehp;
 }
 
@@ -16,6 +20,5 @@ if(isset($_POST['mynum'])) {
 	}
 
 if($_SESSION['client'] < 1 || $_SESSION['server'] < 1) {
-	header("Location: /index.php?module=game&page=gameover");
-	//header("Location: http://".$_SERVER['HTTP_HOST']."/index.php?module=games&page=gameover");
+	header('Location: index.php?module=game&page=gameover', true, 303);
 }
