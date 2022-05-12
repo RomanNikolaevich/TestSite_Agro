@@ -11,5 +11,6 @@ include_once './libs/default.php';
 include_once './variables.php';
 
 // Роутер
+$link = mysqli_connect("localhost", "root", "root", "agrodb");
+mysqli_set_charset($link,'utf8');
 include './skins/'.SKIN.'/index.tpl'; //шаблон
-include_once 'modules/game/game.php';

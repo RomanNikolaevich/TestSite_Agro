@@ -1,8 +1,8 @@
 <?php
 if($_SESSION['server'] < 1) {
-	echo 'Игрок победил';
+	$gamerwin = 'Игрок победил';
 } elseif($_SESSION['client'] < 1) {
-	echo 'Компьютер победил';
+	$compwin = 'Компьютер победил';
 }
 
 if(!empty ($_POST['regame'])) {

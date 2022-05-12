@@ -1,25 +1,35 @@
-
-	<div class="container mt-4">
-		<div class="row">
-			<div class="col">
-				<!-- Форма регистрации -->
-				<h2>Форма регистрации</h2>
-				<form action="regin.php" method="post">
-					<input type="text" class="form-control" name="login" id="login" placeholder="Введите логин"><br>
-					<input type="email" class="form-control" name="email" id="email" placeholder="Введите Email"><br>
-					<input type="text" class="form-control" name="name" id="name" placeholder="Введите имя"
-						   required><br>
-					<input type="text" class="form-control" name="family" id="family" placeholder="Введите фамилию"
-						   required><br>
-					<input type="password" class="form-control" name="password" id="password"
-						   placeholder="Введите пароль"><br>
-					<input type="password" class="form-control" name="password_2" id="password_2"
-						   placeholder="Повторите пароль"><br>
-					<button class="btn btn-suc" name="do_signup" type="submit">Зарегистрировать</button>
-				</form>
-				<br>
-				<p>Если вы зарегистрированы, тогда нажмите <a href="index.php?module=auth&page=login">здесь</a>.</p>
-				<p>Вернуться на <a href="index.php">главную</a>.</p>
-			</div>
-		</div>
-	</div>
+<div style="padding:100px;">
+	<?php if(!isset($_SESSION['regok'])) { ?>
+	<form action="" method="post">
+		<table>
+			<tr>
+				<td width="90">Логин *</td>
+				<td><input type="text" name="login"
+						   value="<?php echo @htmlspecialchars($_POST['login']); ?>"></td>
+				<td><?php if (isset($errors['login'])) {echo $errors['login'];} ?></td>
+			</tr>
+			<tr>
+				<td>Пароль *</td>
+				<td><input type="password" name="password"
+						   value="<?php echo @htmlspecialchars($_POST['password']); ?>"></td>
+				<td><?php echo @$errors['password']; ?></td> <!--короткая запись с глушилкой ошибок-->
+			</tr>
+			<tr>
+				<td>E-mail *</td>
+				<td><input type="email" name="email"
+						   value="<?php echo @htmlspecialchars($_POST['email']); ?>"></td>
+				<td><?php if (isset($errors['email'])) {echo $errors['email'];} ?></td>
+			</tr>
+			<tr>
+				<td>Возраст</td>
+				<td><input type="text" name="age"></td>
+				<td></td>
+			</tr>
+		</table>
+		<p style="font-size:10px;">* - поле обязательное для заполнения</p>
+		<input type="submit" name="sending" value="Зарегистрироваться">
+	</form>
+	<?php } else { unset($_SESSION['regok']); ?>
+	<div>Вы успешно зарегистрировались на сайте!</div>
+	<?php } ?>
+</div>
