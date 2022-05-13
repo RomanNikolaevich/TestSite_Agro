@@ -1,6 +1,6 @@
 <div class="conteiner-content">
 	<div class="conteiner-content-block">
-		<img src="img/page1_img_01.png" alt="">
+		<img src="../../../img/page1_img_01.png" alt="">
 		<h3>
 			<span>PARTNERS</span> AGRO
 		</h3>

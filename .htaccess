@@ -1,7 +1,7 @@
 AddDefaultCharset UTF-8
 php_flag display_errors ON
 
-RewriteEngine On
-RewriteBase /
-RewriteCond %{REQUEST_URI} !\.(js|css|ico|jpg|png)$
-RewriteRule .+ index.php
+#RewriteEngine On
+#RewriteBase /
+#RewriteCond %{REQUEST_URI} !\.(js|css|ico|jpg|png)$
+#RewriteRule .+ index.php

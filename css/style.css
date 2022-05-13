@@ -196,10 +196,12 @@ span {
   color:#fff;
   background-color: orange;
   border-color:#ffa500;
+  text-decoration: none;
 }
 
 .btn-suc:hover {
   color: #fff;
   background-color: orange;
   border-color: #ed8f0ddb;
+  text-decoration: none;
 }

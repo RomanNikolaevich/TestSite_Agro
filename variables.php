@@ -1,5 +1,5 @@
 <?php
-//мои настройки
+$module = $_GET['module'] ?? 'static';
 $page = $_GET['page'] ?? 'main';
 $adminIp = '127.0.0.1';
 $adminVisability = $_SERVER['REMOTE_ADDR'] === $adminIp;
@@ -8,16 +8,12 @@ if($_SERVER['REMOTE_ADDR'] !== $adminIp && $page === 'login') {
 	$page = '404';
 }
 
-$path = 'skins/default/static/pages/'.$page.'.tpl';
+$modulePath = __DIR__.'/modules/'.$module.'/'.$page.'.php';
+$pagePath = __DIR__.'/skins/'.SKIN.'/'.$module.'/'.$page.'.tpl';
 
-//проверка допустимых имен страниц
-$allowed = ['index', 'main', 'contacts', 'aboutus', 'partners', 'products', 'services', 'regin', 'login', 'logout', 'admin'];
-if(!in_array($page, $allowed)) {
-	header("Location: /index.php?module=errors&page=404");
-	exit();
-} else {
-	$modulePath = __DIR__ . '/modules/static/pages/'.$page. '.php';
-	if(file_exists($modulePath)) {
-		include_once $modulePath;
-	}
+if(!file_exists($modulePath)) {
+	$modulePath = __DIR__.'/modules/errors/404.php';
+	$pagePath = __DIR__.'/skins/'.SKIN.'/errors/404.tpl';
 }
+
+include_once $modulePath;

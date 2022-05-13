@@ -9,6 +9,7 @@
       "email": "email@example.com"
     }
   ],
-  "require": {
+  "require-dev": {
+    "symfony/var-dumper": "^6.0"
   }
 }
