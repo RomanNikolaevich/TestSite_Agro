@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var $link
+ */
 if(isset($_POST['loginComm'], $_POST['textComm'], $_POST['do_signup'])) {
 	$errors = [];
 	if(empty($_POST['loginComm'])) {
@@ -11,7 +14,6 @@ if(isset($_POST['loginComm'], $_POST['textComm'], $_POST['do_signup'])) {
 		if(!count($errors)) {
 			$loginComm = $_POST['loginComm'];
 			$textComm = $_POST['textComm'];
-			$link = mysqli_connect("localhost", "root", "root", "agrodb");
 			$query = "INSERT INTO comments SET name='$loginComm', text='$textComm'";
 			mysqli_query($link, $query) or exit(mysqli_error($link));
 			$_SESSION['commentOk'] = 'OK';
@@ -20,4 +22,3 @@ if(isset($_POST['loginComm'], $_POST['textComm'], $_POST['do_signup'])) {
 		}
 	}
 }
-

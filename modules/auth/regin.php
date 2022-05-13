@@ -1,11 +1,14 @@
 <?php
+/**
+ * @var $link
+ */
 if(isset($_POST['login'], $_POST['email'], $_POST['password'])) {
 	$errors = [];
 	$login = $_POST['login'];
 	$password = $_POST['password'];
 	$email = $_POST['email'];
 	$query = "SELECT * FROM users WHERE login='$login'";
-	$link = mysqli_connect("localhost", "root", "root", "agrodb");
+
 	$user = mysqli_fetch_assoc(mysqli_query($link, $query));
 
 	if(empty($login)) {
