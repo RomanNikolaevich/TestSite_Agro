@@ -3,6 +3,7 @@
 		<div class="col">
 			<?php if(!isset($_SESSION['regok'])) { ?>
 			<h2>Регистрация нового пользователя:</h2>
+			<h4 style="color:red"><?php echo @$errors['loginwrong']; ?></h4>
 			<form action="" method="post">
 				<input type="text" name="login" class="form-control"
 					   placeholder="Введите логин *"
