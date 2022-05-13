@@ -16,7 +16,12 @@
 			<h4 style="color:red"><?php if (!empty($errorForm['loginError'])) { echo $errorForm['loginError'];} ?></h4>
 			<h4 style="color:red"><?php if (!empty($errorForm['emailError'])) { echo $errorForm['emailError'];} ?></h4>
 			<h4 style="color:red"><?php if (!empty($errorForm['enterError'])) { echo $errorForm['enterError'];} ?></h4>
-			<p>Если вы еще не зарегистрированы, тогда нажмите <a href="index.php?module=auth&page=regin">здесь</a>.</p>
+			<p>Если вы еще не зарегистрированы, тогда нажмите здесь:</p>
+			<div class="btn btn-suc" style=" text-decoration: none;">
+				<a style=" text-decoration: none; color: white;"
+				   href="index.php?module=auth&page=regin">Зарегистрироваться</a>
+			</div>
+			<p></p>
 			<p>Вернуться на <a href="<?php echo $_SERVER['PHP_SELF']; ?>">главную</a>.</p>
 		</div>
 	</div>
