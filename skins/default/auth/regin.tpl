@@ -7,15 +7,15 @@
 				<input type="text" name="login" class="form-control"
 					   placeholder="Введите логин *"
 					   value="<?php echo @htmlspecialchars($_POST['login']); ?>">
-				<?php if (isset($errors['login'])) {echo $errors['login'];} ?>
+				<span style="color:red"><?php if (isset($errors['login'])) {echo $errors['login'];} ?></span>
 				<input type="password" name="password" class="form-control"
 					   placeholder="Введите пароль *"
 					   value="<?php echo @htmlspecialchars($_POST['password']); ?>">
-				<?php echo @$errors['password']; ?> <!--короткая запись с глушилкой ошибок-->
+				<span style="color:red"><?php echo @$errors['password']; ?> </span>
 				<input type="email" name="email" class="form-control"
 					   placeholder="Введите ваш email *"
 					   value="<?php echo @htmlspecialchars($_POST['email']); ?>">
-				<?php if (isset($errors['email'])) {echo $errors['email'];} ?>
+				<span style="color:red"><?php if (isset($errors['email'])) {echo $errors['email'];} ?> </span>
 				<input type="text" name="age" class="form-control"
 					   placeholder="Введите ваш возраст">
 				<p style="font-size:10px;">* - поле обязательное для заполнения</p>
