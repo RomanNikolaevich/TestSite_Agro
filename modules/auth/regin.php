@@ -20,8 +20,10 @@ if(isset($_POST['login'], $_POST['email'], $_POST['password'])) {
 		`age` = ".(int)$_POST['age']."
 		") or exit(mysqli_error($link)); //вывод ошибок БД
 		$_SESSION['regok'] = 'OK';
-		header("Location: /index.php?module=auth&page=regin");
+		header("Location: index.php?module=auth&page=regin");
+		$_SESSION['access'] = 1;
+		$_SESSION['login'] = $_POST['login'];
+		setcookie('access', 1, time() + 3600, '/');
 		exit();
-//выполняем какие-то действия
 	}
 }
