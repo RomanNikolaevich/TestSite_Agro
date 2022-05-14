@@ -1,23 +1,35 @@
+<?php
+/**
+ * @var $error
+ */
+?>
 <div class="container mt-4">
 	<div class="row">
 		<div class="form-group">
 			<h2>ОТЗЫВЫ</h2>
 			<h5>Если Вы остались довольны услугами <span>"AGRO.UNITED"</span> или вам что-то не понравилось,
 				то можете оставить свой комметарий</h5>
-			<?php if(!isset($_SESSION['commentOk'])) { ?>
-			<form action="" method="post">
-				<input type="text" class="form-control" name="loginComm" id="loginReg"
-					   value="<?php echo @htmlspecialchars($_POST['loginComm']); ?>"
-					   placeholder="Введите логин *"><br>
-				<span style="color:red"><?php echo @$errors['loginComm']?></span><br>
-				<textarea class="form-control" name="textComm" placeholder="Оставьте свой комментарий *"></textarea><br>
-				<span style="color:red"><?php echo @$errors['textComm']?></span><br>
-				<p style="font-size:12px;">* - поле обязательное для заполнения</p>
-				<button class="btn btn-suc" name="do_signup" type="submit">Отправить</button>
-			</form>
-			<?php } else { unset($_SESSION['commentOk']); ?>
-			<div>Спасибо за оставленный комментарий!</div>
-			<?php } ?>
+			<?php
+			if(!isset($_SESSION['commentOk'])) { ?>
+				<form action="" method="post">
+					<input type="text" class="form-control" name="loginComm" id="loginReg"
+						   value="<?php
+						   echo @htmlspecialchars($_POST['loginComm']); ?>"
+						   placeholder="Введите логин *"><br>
+					<span style="color:red"><?php
+						echo @$errors['loginComm'] ?></span><br>
+					<textarea class="form-control" name="textComm" placeholder="Оставьте свой комментарий *"></textarea><br>
+					<span style="color:red"><?php
+						echo @$errors['textComm'] ?></span><br>
+					<p style="font-size:12px;">* - поле обязательное для заполнения</p>
+					<button class="btn btn-suc" name="do_signup" type="submit">Отправить</button>
+				</form>
+				<?php
+			} else {
+				unset($_SESSION['commentOk']); ?>
+				<div>Спасибо за оставленный комментарий!</div>
+				<?php
+			} ?>
 			<br>
 		</div>
 	</div>
@@ -27,11 +39,20 @@
 	<div class="row">
 		<div class="col">
 			<h4>Отзывы наших клиентов:</h4>
-			<p>Тут скоро будет вывод на экран комментов (в разработке)</p>
+			<div class="comment-body">
+				<p>
+					<?php echo @$commentCountSumm ?>
+					<?php echo @$commentCountNull ?>
+				</p>
+				<div>
+					<?php echo comment_output() ?>
+				</div>
+			</div>
 			<br>
 		</div>
 	</div>
 </div>
+
 <div class="container mt-4">
 	<div class="row">
 		<div class="col">
@@ -53,6 +74,7 @@
 						</a>
 					</li>
 				</ul>
+			</nav>
 		</div>
 	</div>
 </div>
