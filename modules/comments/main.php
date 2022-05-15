@@ -13,7 +13,11 @@ if(isset($_POST['loginComm'], $_POST['textComm'], $_POST['do_signup'])) {
 	}
 	if(!empty($_POST['loginComm']) and !empty($_POST['textComm'])) {
 		if(!count($errors)) {
-			$loginComm = $_POST['loginComm'];
+			if($_SESSION['access'] = 1) {
+				$loginComm = $_SESSION['login'];
+			} else {
+				$loginComm = $_POST['loginComm'];
+			}
 			$textComm = $_POST['textComm'];
 			$query = "INSERT INTO comments SET name='$loginComm', text='$textComm'";
 			mysqli_query($link, $query) or exit(mysqli_error($link));
@@ -23,16 +27,19 @@ if(isset($_POST['loginComm'], $_POST['textComm'], $_POST['do_signup'])) {
 		}
 	}
 }
+//Если пользователь уже залогинился:
+
 
 //пагинатор - поверка, есть ли GET запрос
 $pageno = $_GET['page'] ?? 1;
 // Назначаем количество данных на одной странице
 $limit = 5;
 // Вычисляем с какого объекта начать выводить
+
 $offset = ($pageno - 1) * $limit;
 
 // Создаём SQL запрос для получения данных:
-$commentQuery = 'SELECT * FROM `comments` ORDER BY `date` DESC LIMIT $offset, $limit';
+$commentQuery = 'SELECT * FROM `comments` ORDER BY `date` DESC LIMIT $limit OFFSET $offset';
 //or exit(mysqli_error());
 // Отправляем SQL запрос
 $commentResult = mysqli_query($link, $commentQuery);
@@ -42,6 +49,10 @@ $commentOutput = mysqli_fetch_assoc($commentResult);
 
 //Получает количество строк в наборе результатов:
 $commentCount = mysqli_num_rows($commentResult);
+
+//Считаем количество страниц:
+$total_pages = round($commentCount / $limit, 0);
+
 //счетчик комментариев:
 if($commentCount) {
 	$commentCountSumm = 'Всего '.$commentCount.' коментариев:<br>';
@@ -51,8 +62,9 @@ if($commentCount) {
 
 //цикл вывода комменнтариев:
 while($commentOutput) {
-	$commentOutputBlock = '<div>'.$commentOutput['name'].' '.'('.$commentOutput['date'].')'.' : '.'<br>'.
+	$commentOutput = '<div>'.$commentOutput['name'].' '.'('.$commentOutput['date'].')'.' : '.'<br>'.
 	'<i>'.$commentOutput['text'].'</i>'.'<br>'.
 	'</div>'.'<p> </p>';
 }
+
 mysqli_close($link);

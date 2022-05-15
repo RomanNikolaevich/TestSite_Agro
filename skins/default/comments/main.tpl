@@ -14,10 +14,12 @@
 			<?php
 			if(!isset($_SESSION['commentOk'])) { ?>
 				<form action="" method="post">
+					<?php if($_SESSION['access'] = 1): ?> <!--скрываем блок если зарегистрирован пользователь-->
 					<input type="text" class="form-control" name="loginComm" id="loginReg"
 						   value="<?php
 						   echo @htmlspecialchars($_POST['loginComm']); ?>"
 						   placeholder="Введите логин *"><br>
+					<?php endif; ?> <!--заканчивается блок сокрытия-->
 					<span style="color:red"><?php
 						echo $errors['loginComm'] ?></span><br>
 					<textarea class="form-control" name="textComm" placeholder="Оставьте свой комментарий *"></textarea><br>
@@ -36,7 +38,7 @@
 		</div>
 	</div>
 </div>
-
+<!--Отзывы:-->
 <div class="container mt-4">
 	<div class="row">
 		<div class="col">
@@ -49,23 +51,15 @@
 		</div>
 	</div>
 </div>
-
+<!--Пагинатор:-->
 <div class="container mt-4">
 	<div class="row">
 		<div class="col">
 			<nav aria-label="Page navigation example">
 				<ul class="pagination">
-					<li class="<?php
-					if($pageno <= 1) {
-						echo 'disabled';
-					} ?>"
-					">
-					<a class="page-link" href="<?php
-					if($pageno <= 1) {
-						echo '#';
-					} else {
-						echo "?comments=".($pageno - 1);
-					} ?>" aria-label="Previous">
+					<li class="<?php if($pageno <= 1) {echo 'disabled'; } ?>">
+					<a class="page-link" href="<?php if($pageno <= 1) {echo '#';
+						} else { echo "?comments=".($pageno - 1);} ?>" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
 						<span class="sr-only">Previous</span>
 					</a>
@@ -77,12 +71,8 @@
 					if($pageno >= $total_pages) {
 						echo 'disabled';
 					} ?>">
-						<a class="page-link" href="<?php
-						if($pageno >= $total_pages) {
-							echo '#';
-						} else {
-							echo "module=comments&page=".($pageno + 1);
-						} ?>" aria-label="Next">
+						<a class="page-link" href="<?php if($pageno >= $total_pages) { echo '#';
+						} else { echo "module=comments&page=".($pageno + 1);} ?>" aria-label="Next">
 							<span aria-hidden="true">&raquo;</span>
 							<span class="sr-only">Next</span>
 						</a>

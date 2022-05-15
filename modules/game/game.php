@@ -20,5 +20,5 @@ if(isset($_POST['mynum'])) {
 	}
 
 if($_SESSION['client'] < 1 || $_SESSION['server'] < 1) {
-	header('Location: index.php?module=game&page=gameover', true, 303);
+	header('Location: index.php?module=game&action=gameover', true, 303);
 }

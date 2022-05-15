@@ -2,7 +2,7 @@
 /**
  * @var $commentCountSumm
  * @var $commentCountNull
- * @var $commentOutputBlock
+ * @var $commentOutput
  */
 ?>
 <p>
@@ -10,5 +10,5 @@
 	<?php echo @$commentCountNull ?>
 </p>
 <div>
-	<?php echo $commentOutputBlock ?>
+	<?php echo @$commentOutput ?>
 </div>
