@@ -13,7 +13,7 @@ if(isset($_POST['loginComm'], $_POST['textComm'], $_POST['do_signup'])) {
 	}
 	if(!empty($_POST['loginComm']) and !empty($_POST['textComm'])) {
 		if(!count($errors)) {
-			if($_SESSION['access'] = 1) {
+			if(!empty($_SESSION['login'])) {
 				$loginComm = $_SESSION['login'];
 			} else {
 				$loginComm = $_POST['loginComm'];
