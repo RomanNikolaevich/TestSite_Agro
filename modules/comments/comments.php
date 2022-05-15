@@ -2,6 +2,7 @@
 /**
  * @var $link
  */
+//Информацию из форм отправляем в БД:
 if(isset($_POST['loginComm'], $_POST['textComm'], $_POST['do_signup'])) {
 	$errors = [];
 	if(empty($_POST['loginComm'])) {
@@ -23,9 +24,23 @@ if(isset($_POST['loginComm'], $_POST['textComm'], $_POST['do_signup'])) {
 	}
 }
 
-$commentResult = mysqli_query($link, 'SELECT * FROM `comments` ORDER BY `date` DESC')
-or exit(mysqli_error());
+//пагинатор - поверка, есть ли GET запрос
+$pageno = $_GET['page'] ?? 1;
+// Назначаем количество данных на одной странице
+$limit = 5;
+// Вычисляем с какого объекта начать выводить
+$offset = ($pageno - 1) * $limit;
+
+// Создаём SQL запрос для получения данных:
+$commentQuery = 'SELECT * FROM `comments` ORDER BY `date` DESC LIMIT $offset, $limit';
+//or exit(mysqli_error());
+// Отправляем SQL запрос
+$commentResult = mysqli_query($link, $commentQuery);
+
+//Выбирает следующую строку из набора результатов и помещает её в ассоциативный массив:
 $commentOutput = mysqli_fetch_assoc($commentResult);
+
+//Получает количество строк в наборе результатов:
 $commentCount = mysqli_num_rows($commentResult);
 //счетчик комментариев:
 if($commentCount) {
@@ -34,15 +49,10 @@ if($commentCount) {
 	$commentCountNull = 'Комментариев пока еще нет, вы будете первым';
 }
 
-// вывод комментариев на экран:
-function comment_output() {
-	$query = 'SELECT * FROM `comments` ORDER BY `date` DESC';
-	$link = mysqli_connect(DB_HOST, DB_LOGIN, DB_PASS, DB_NAME);
-	$commentResult = mysqli_query($link, $query);
-	while($row = mysqli_fetch_assoc($commentResult)) {
-		echo '<div>'.$row['name'].' ';
-		echo '('.$row['date'].')'.' : '.'<br>';
-		echo '<i>'.$row['text'].'</i>'.'<br>';
-		echo '</div>'.'<p> </p>';
-	}
+//цикл вывода комменнтариев:
+while($commentOutput) {
+	$commentOutputBlock = '<div>'.$commentOutput['name'].' '.'('.$commentOutput['date'].')'.' : '.'<br>'.
+	'<i>'.$commentOutput['text'].'</i>'.'<br>'.
+	'</div>'.'<p> </p>';
 }
+mysqli_close($link);

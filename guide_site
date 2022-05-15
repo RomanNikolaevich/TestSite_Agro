@@ -1,19 +1,16 @@
 Папки:
 /.diea - сюда не лезим
-
 /css - стили
-
 /img - картинки для шкурки сайта
-
 /js - скрипты JS
-
-/libs - папка с функциями: libs в ней создаем файл default.php - здесь будем записывать стандартные функции, которые будут использоваться везде, на всем сайте.
-
+/libs - папка с функциями: libs в ней создаем файл default.php - тут пока одна функция на распечатку.
 /modules - в нее добавляем все классы, функции, пагинатор (навигация по страницам - внизу экрана 1, 2, ...898),
  аплоадер картинок - все делаем отдельными файлами с понятным названием (файлы в формате *.php)
 /modules/admin - админка
 /modules/auth - авиризация и регистрация
+/modules/comments - комментарии
 /modules/error - ошибки
+/modules/game - игра
 /modules/news - новости
 /modules/static/pages - логика страничек
 /modules/voting - голосовалка
@@ -22,79 +19,41 @@
 /skins/default/ - стандартная шкурка3
 /skins/default/admin - админка
 /skins/default/auth - авторизация
+/skins/default/comments - комментарии
 /skins/default/errors - ошибки
+/skins/default/game - игра
 /skins/default/news - новости
 /skins/default/static/menu - страницы меню
 /skins/default/static/pages - страницы сайта
 /skins/default/voting - голосовалка
 
-/work - здесь будут архивы для скачки, галаерея и прочее 
+/vendor - плагины
 
+/work - здесь будут архивы для скачки, галаерея и прочее 
 
 Файлы в корневой:
 .gitignore - скрываем файлы для гитхаба
 .htaccess - файл дополнительной конфигурации веб-сервера.
 composer.json - компосер
+composer.lock - компосер
+config.php - константы
+db_config - подключение БД
 index.php - через него собирается все страницы сайта
 variables.php - функции с главной страницы
-db_config - подключение БД
 
 GET:
     Модули (Controllers)
-        index.php?module=login
-            /module/auth/main.php
-        index.php?module=login&page=main
-            /module/auth/main.php
-        index.php?module=login&page=logout
+        index.php?module=auth&page=login
+            /module/auth/login.php
+        index.php?module=auth&page=logout
             /module/auth/logout.php
     Шаблон (Views)
-        index.php?module=login
-            /module/template_name/auth/main.tpl
-        index.php?module=login&page=main
-            /module/template_name/auth/main.tpl
-        index.php?module=login&page=logout
-            /module/template_name/auth/logout.tpl
+        index.php?module=auth&page=login
+            /skins/default/auth/login.tpl
+        index.php?module=auth&page=logout
+            /skins/default/auth/logout.tpl
 
 module/название_модуля/название_страницы.php
     для модуля без указания страницы будет загружаться main.php
 skins/название_шаблона/название_модуля/название_страницы.tpl
     для модуля без указания страницы будет загружаться main.tpl
-
- Вопросы:
- 1) Как формируется адресная строка?
- в одних браузерах: https://blabla.com/module/auth/logout.php
- в других https://blabla.com/index.php?module=login&page=logout
- я понимаю, что в первом примереэто какое-то ЧПУ скорее всего,
- но так понятнее чем набор каких-то ключей и значений
- в случае гугль запроса понятно - я ищу слово модуль + логаут и оно выпадет в адресной строке,
- а как получаются/создаются строки без поиска?
-
- 2) index.php указано:
- include_once __DIR__ . '/vendor/autoload.php';
- include_once './libs/default.php';
-
- почему нельзя прописать так:
- include_once './vendor/autoload.php'; - или это тоже самое?
- include_once './libs/default.php';
-
- 3) почему так?
-$pagePath = 'skins/'. SKIN .'/'. $module. '/' .$page.'.tpl';
-$module = $_GET['module'] ?? 'static'; - тут static = /static/pages/?
-$pagePath = 'skins/.SKIN./static/pages/'.$page.'.tpl';
-
-4) подключение папки с игрой:
-я добавил в index.php
-include_once 'modules/game/game.php';
-
-нужно ли тут создавать какие-то переменные типа $game или константу GAME?
-Эти дополнительные переменные только запутывают код.
-Почему просто нельзя из index.php подключить каждый php файл?
-
-5) как правильно прописывать GET запрос в случае с игрой?
-для aboutus там прописано index.php?page=aboutus
-а для игры что?
-index.php?page=game - не работает
-
-6) после переноса логики из modules/static/pages/ в папку modules/auth/ - папка осиротела
-
-

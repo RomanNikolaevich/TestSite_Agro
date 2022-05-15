@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var $pagePath
+ */
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
