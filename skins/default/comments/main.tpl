@@ -22,7 +22,10 @@
 					<?php endif; ?> <!--заканчивается блок сокрытия-->
 					<span style="color:red"><?php
 						echo $errors['loginComm'] ?></span><br>
-					<textarea class="form-control" name="textComm" placeholder="Оставьте свой комментарий *"></textarea><br>
+					<span style="color:red"><?php
+						echo $errors['textComm50'] ?></span><br>
+					<textarea class="form-control" name="textComm" placeholder="Оставьте свой комментарий *">
+					</textarea><br>
 					<span style="color:red"><?php
 						echo $errors['textComm'] ?></span><br>
 					<p style="font-size:12px;">* - поле обязательное для заполнения</p>

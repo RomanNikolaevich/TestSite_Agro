@@ -10,6 +10,8 @@ if(isset($_POST['loginComm'], $_POST['textComm'], $_POST['do_signup'])) {
 	}
 	if(empty($_POST['textComm'])) {
 		$errors['textComm'] = 'Вы не заполнили комментарий';
+	} elseif(mb_strlen($_POST['textComm'], 'UTF-8') <50){
+		$errors['textComm50'] = 'Длинна комментария меньше 50 символов!';
 	}
 	if(!empty($_POST['loginComm']) and !empty($_POST['textComm'])) {
 		if(!count($errors)) {
@@ -22,7 +24,7 @@ if(isset($_POST['loginComm'], $_POST['textComm'], $_POST['do_signup'])) {
 			$query = "INSERT INTO comments SET name='$loginComm', text='$textComm'";
 			mysqli_query($link, $query) or exit(mysqli_error($link));
 			$_SESSION['commentOk'] = 'OK';
-			header("Location: index.php?module=comments&page=comments");
+			header("Location: index.php?module=comments&action=comments");
 			exit();
 		}
 	}
