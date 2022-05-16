@@ -3,70 +3,55 @@
  * @var $link
  */
 //Информацию из форм отправляем в БД:
-if(isset($_POST['loginComm'], $_POST['textComm'], $_POST['do_signup'])) {
+if(isset($_POST['username'], $_POST['comment'], $_POST['do_signup'])) {
 	$errors = [];
-	if(empty($_POST['loginComm'])) {
-		$errors['loginComm'] = 'Вы не заполнили логин';
+	if(empty($_POST['username'])) {
+		$errors['username'] = 'Вы не заполнили логин';
 	}
-	if(empty($_POST['textComm'])) {
-		$errors['textComm'] = 'Вы не заполнили комментарий';
-	} elseif(mb_strlen($_POST['textComm'], 'UTF-8') <50){
-		$errors['textComm50'] = 'Длинна комментария меньше 50 символов!';
+	if(empty($_POST['comment'])) {
+		$errors['comment'] = 'Вы не заполнили комментарий';
+	} elseif(mb_strlen($_POST['comment'], 'UTF-8') < 50) {
+		$errors['comment'] = 'Длинна комментария меньше 50 символов!';
 	}
-	if(!empty($_POST['loginComm']) and !empty($_POST['textComm'])) {
+	if(!empty($_POST['username']) and !empty($_POST['comment'])) {
 		if(!count($errors)) {
 			if(!empty($_SESSION['login'])) {
-				$loginComm = $_SESSION['login'];
+				$username = $_SESSION['login'];
 			} else {
-				$loginComm = $_POST['loginComm'];
+				$username = $_POST['username'];
 			}
-			$textComm = $_POST['textComm'];
-			$query = "INSERT INTO comments SET name='$loginComm', text='$textComm'";
+			$comment = $_POST['comment'];
+			$query = "INSERT INTO comments SET name='$username', text='$comment'";
 			mysqli_query($link, $query) or exit(mysqli_error($link));
 			$_SESSION['commentOk'] = 'OK';
-			header("Location: index.php?module=comments&action=comments");
+			header("Location: index.php?module=comments&action=main");
 			exit();
 		}
 	}
 }
-//Если пользователь уже залогинился:
-
 
 //пагинатор - поверка, есть ли GET запрос
 $pageno = $_GET['page'] ?? 1;
-// Назначаем количество данных на одной странице
+// LIMIT задаёт лимит записей
 $limit = 5;
-// Вычисляем с какого объекта начать выводить
-
+//OFFSET задает количество строк, которые нужно пропустить.
 $offset = ($pageno - 1) * $limit;
 
-// Создаём SQL запрос для получения данных:
-$commentQuery = 'SELECT * FROM `comments` ORDER BY `date` DESC LIMIT $limit OFFSET $offset';
-//or exit(mysqli_error());
-// Отправляем SQL запрос
-$commentResult = mysqli_query($link, $commentQuery);
+$comments = getComments($link, $limit, $offset);
 
-//Выбирает следующую строку из набора результатов и помещает её в ассоциативный массив:
-$commentOutput = mysqli_fetch_assoc($commentResult);
+function getComments($link, int $limit, int $offset) {
+	$commentQuery = "SELECT * FROM `comments` ORDER BY `date` DESC LIMIT $limit OFFSET $offset";
+	$commentResult = mysqli_query($link, $commentQuery);
+	$comments = mysqli_fetch_all($commentResult, MYSQLI_ASSOC);
 
-//Получает количество строк в наборе результатов:
-$commentCount = mysqli_num_rows($commentResult);
-
-//Считаем количество страниц:
-$total_pages = round($commentCount / $limit, 0);
+	return $comments;
+}
 
 //счетчик комментариев:
-if($commentCount) {
-	$commentCountSumm = 'Всего '.$commentCount.' коментариев:<br>';
-} else {
-	$commentCountNull = 'Комментариев пока еще нет, вы будете первым';
-}
+$commentResult = mysqli_query($link, "SELECT * FROM `comments`");
+$commentCount = mysqli_num_rows ($commentResult);
 
-//цикл вывода комменнтариев:
-while($commentOutput) {
-	$commentOutput = '<div>'.$commentOutput['name'].' '.'('.$commentOutput['date'].')'.' : '.'<br>'.
-	'<i>'.$commentOutput['text'].'</i>'.'<br>'.
-	'</div>'.'<p> </p>';
-}
+//Считаем количество страниц:
+$total_pages = ceil($commentCount/$limit);
 
 mysqli_close($link);
