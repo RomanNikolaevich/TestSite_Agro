@@ -79,7 +79,9 @@
                     <?php
                     foreach ($comments as $comment):?>
 						<div> <!--Блок вывода комментариев из БД:-->
-                            <?=$comment['name']?>( <?=$comment['date']?> ) : <br>
+							# <?php if($commentCount > 0) {echo $commentCount--;} ?> |
+							post ID: <u><?=$comment['id']?></u> | user: <u><?=$comment['name']?></u> |
+							date:  <u><?=$comment['date']?></u> | : <br>
 							<i><?=str_replace( "\n", '<br />', $comment['text']); ?></i><br>
 						</div>
 						<p></p>

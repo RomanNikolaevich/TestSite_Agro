@@ -16,11 +16,11 @@ if (isset($_POST['username'], $_POST['comment'], $_POST['do_signup'])) {
     }
     if (!empty($_POST['username']) and !empty($_POST['comment'])) {
         if (!count($errors)) {
-            if (!empty($_SESSION['username'])) {
-                $username = $_SESSION['username'];
-            } else {
+            if (empty($_SESSION['username'])) {
                 $_SESSION['username'] = $_POST['username'];
                 $username = $_POST['username'];
+            } else {
+                $username = $_SESSION['username'];
             }
             $comment = $_POST['comment'];
             $query = "INSERT INTO comments SET name='$username', text='$comment'";
