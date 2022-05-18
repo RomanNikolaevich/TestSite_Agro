@@ -18,11 +18,11 @@ if (isset($_POST['username'], $_POST['comment'], $_POST['do_signup'])) {
         if (!count($errors)) {
             if (empty($_SESSION['username'])) {
                 $_SESSION['username'] = $_POST['username'];
-                $username = $_POST['username'];
+                $username = mysqli_real_escape_string($link,$_POST['username']);
             } else {
-                $username = $_SESSION['username'];
+                $username = mysqli_real_escape_string($link, $_SESSION['username']);
             }
-            $comment = $_POST['comment'];
+            $comment = mysqli_real_escape_string($link, $_POST['comment']);
             $query = "INSERT INTO comments SET name='$username', text='$comment'";
             mysqli_query($link, $query) or exit(mysqli_error($link));
             $_SESSION['commentOk'] = 'OK';
@@ -55,8 +55,8 @@ function getComments($link, int $limit, int $offset)
 }
 
 //счетчик комментариев:
-$commentResult = mysqli_query($link, "SELECT * FROM `comments`");
-$commentCount = mysqli_num_rows($commentResult);
+$commentResult = mysqli_query($link, "SELECT * FROM `comments`"); //запрос к БД комментов
+$commentCount = mysqli_num_rows($commentResult); // Получаем количество строк в БД
 
 //Считаем количество страниц:
 $total_pages = ceil($commentCount / $limit);

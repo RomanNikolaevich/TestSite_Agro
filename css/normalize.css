@@ -5,12 +5,12 @@
 
 /**
  * 1. Correct the line height in all browsers.
- * 2.php. Prevent adjustments of font size after orientation changes in iOS.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
 
 html {
   line-height: 1.15; /* 1 */
-  -webkit-text-size-adjust: 100%; /* 2.php */
+  -webkit-text-size-adjust: 100%; /* 2 */
 }
 
 /* Sections
@@ -47,23 +47,23 @@ h1 {
 
 /**
  * 1. Add the correct box sizing in Firefox.
- * 2.php. Show the overflow in Edge and IE.
+ * 2. Show the overflow in Edge and IE.
  */
 
 hr {
   box-sizing: content-box; /* 1 */
   height: 0; /* 1 */
-  overflow: visible; /* 2.php */
+  overflow: visible; /* 2 */
 }
 
 /**
  * 1. Correct the inheritance and scaling of font size in all browsers.
- * 2.php. Correct the odd `em` font sizing in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
  */
 
 pre {
   font-family: monospace, monospace; /* 1 */
-  font-size: 1em; /* 2.php */
+  font-size: 1em; /* 2 */
 }
 
 /* Text-level semantics
@@ -79,13 +79,13 @@ a {
 
 /**
  * 1. Remove the bottom border in Chrome 57-
- * 2.php. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
  */
 
 abbr[title] {
   border-bottom: none; /* 1 */
-  text-decoration: underline; /* 2.php */
-  text-decoration: underline dotted; /* 2.php */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
 }
 
 /**
@@ -99,14 +99,14 @@ strong {
 
 /**
  * 1. Correct the inheritance and scaling of font size in all browsers.
- * 2.php. Correct the odd `em` font sizing in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
  */
 
 code,
 kbd,
 samp {
   font-family: monospace, monospace; /* 1 */
-  font-size: 1em; /* 2.php */
+  font-size: 1em; /* 2 */
 }
 
 /**
@@ -154,7 +154,7 @@ img {
 
 /**
  * 1. Change the font styles in all browsers.
- * 2.php. Remove the margin in Firefox and Safari.
+ * 2. Remove the margin in Firefox and Safari.
  */
 
 button,
@@ -165,7 +165,7 @@ textarea {
   font-family: inherit; /* 1 */
   font-size: 100%; /* 1 */
   line-height: 1.15; /* 1 */
-  margin: 0; /* 2.php */
+  margin: 0; /* 2 */
 }
 
 /**
@@ -232,14 +232,14 @@ fieldset {
 
 /**
  * 1. Correct the text wrapping in Edge and IE.
- * 2.php. Correct the color inheritance from `fieldset` elements in IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
  * 3. Remove the padding so developers are not caught out when they zero out
  *    `fieldset` elements in all browsers.
  */
 
 legend {
   box-sizing: border-box; /* 1 */
-  color: inherit; /* 2.php */
+  color: inherit; /* 2 */
   display: table; /* 1 */
   max-width: 100%; /* 1 */
   padding: 0; /* 3 */
@@ -264,13 +264,13 @@ textarea {
 
 /**
  * 1. Add the correct box sizing in IE 10.
- * 2.php. Remove the padding in IE 10.
+ * 2. Remove the padding in IE 10.
  */
 
 [type="checkbox"],
 [type="radio"] {
   box-sizing: border-box; /* 1 */
-  padding: 0; /* 2.php */
+  padding: 0; /* 2 */
 }
 
 /**
@@ -284,12 +284,12 @@ textarea {
 
 /**
  * 1. Correct the odd appearance in Chrome and Safari.
- * 2.php. Correct the outline style in Safari.
+ * 2. Correct the outline style in Safari.
  */
 
 [type="search"] {
   -webkit-appearance: textfield; /* 1 */
-  outline-offset: -2px; /* 2.php */
+  outline-offset: -2px; /* 2 */
 }
 
 /**
@@ -302,12 +302,12 @@ textarea {
 
 /**
  * 1. Correct the inability to style clickable types in iOS and Safari.
- * 2.php. Change font properties to `inherit` in Safari.
+ * 2. Change font properties to `inherit` in Safari.
  */
 
 ::-webkit-file-upload-button {
   -webkit-appearance: button; /* 1 */
-  font: inherit; /* 2.php */
+  font: inherit; /* 2 */
 }
 
 /* Interactive

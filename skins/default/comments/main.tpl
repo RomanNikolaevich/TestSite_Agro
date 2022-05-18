@@ -24,24 +24,22 @@
                     <?php
                     if (empty($_SESSION['username'])) { ?> <!--блок коментатора-->
 						<input type="text" class="form-control" name="username" id="loginReg"
-							   value="<?=@htmlspecialchars($_POST['username']);?>"
+							   value="<?= @htmlspecialchars($_POST['username']);?>"
 							   placeholder="Введите логин *"><br>
                         <?php
                         if (!empty($errors['username'])) { ?>
 							<span style="color:red"><?=$errors['username']?></span><br>
-                        <?php
+                            <?php
                         } ?>
-                    <?php
+                        <?php
                     } else { ?> <!--заканчивается 1 блок условие "если не зарегистрирован"-->
 						<input type="text" class="form-control" name="disabledusername" id="disabledTextInput"
 							   value=""
-							   placeholder="<?php
-                               echo 'Вы вошли как '.$_SESSION['username'];
-                               ?>" disabled><br>
+							   placeholder="<?= @htmlspecialchars($_SESSION['username']); ?>" disabled><br>
 						<p style="font-size:12px;">Для смены пользователя нажмите:
 							<button class="btn btn-suc" name="relogin" type="submit">Перезайти</button>
 						</p>
-                    <?php
+                        <?php
                     } ?> <!--заканчивается 2 блок условие "если зарегистрирован"-->
 					<p></p>
 					<textarea class="form-control" name="comment"
@@ -79,10 +77,14 @@
                     <?php
                     foreach ($comments as $comment):?>
 						<div> <!--Блок вывода комментариев из БД:-->
-							# <?php if($commentCount > 0) {echo $commentCount--;} ?> |
-							post ID: <u><?=$comment['id']?></u> | user: <u><?=$comment['name']?></u> |
-							date:  <u><?=$comment['date']?></u> | : <br>
-							<i><?=str_replace( "\n", '<br />', $comment['text']); ?></i><br>
+							# <?php
+                            if ($commentCount > 0) {
+                                echo $commentCount--;
+                            } ?> |
+							post ID: <u><?=$comment['id']?></u> |
+							user: <u><?=@htmlspecialchars($comment['name'])?></u> |
+							date: <u><?=$comment['date']?></u> | : <br>
+							<i><?= nl2br(htmlspecialchars($comment['text']));?></i><br>
 						</div>
 						<p></p>
                     <?php
@@ -105,47 +107,38 @@
                 if ($pageno > 1): ?>
 					<li class="page-item">
 						<a class="page-link" href="?module=comments&page=
-							<?php
-                        echo($pageno - 1); ?>">Prev</a>
+							<?= ($pageno - 1); ?>">Prev</a>
 					</li>
                 <?php
-                endif; ?>
-                <?php
+                endif;
                 if ($pageno > 1): ?>
 					<li class="page-item">
-						<a class="page-link" href="?module=comments&page=<?php
-                        echo($pageno - 1); ?>">
-                            <?php
-                            echo($pageno - 1); ?></a>
+						<a class="page-link" href="?module=comments&page=<?= ($pageno - 1); ?>">
+                            <?= ($pageno - 1); ?></a>
 					</li>
                 <?php
                 endif; ?>
 				<li class="page-item">
-					<a class="page-link" href="?module=comments&page=<?php
-                    echo $pageno; ?>">
+					<a class="page-link" href="?module=comments&page=<?= $pageno; ?>">
                         <?php
                         echo $pageno; ?></a>
 				</li>
                 <?php
                 if ($pageno < $total_pages): ?>
 					<li class="page-item">
-						<a class="page-link" href="?module=comments&page=<?php
-                        echo($pageno + 1); ?>">
-                            <?php
-                            echo($pageno + 1); ?></a>
+						<a class="page-link" href="?module=comments&page=<?= ($pageno + 1); ?>">
+                            <?= ($pageno + 1); ?></a>
 					</li>
                 <?php
-                endif; ?>
-                <?php
+                endif;
                 if ($pageno < $total_pages): ?>
 					<li class="page-item">
-						<a class="page-link" href="?module=comments&page=<?php
-                        echo($pageno + 1); ?>">Next</a>
+						<a class="page-link" href="?module=comments&page=<?= ($pageno + 1); ?>">Next</a>
 					</li>
                 <?php
                 endif; ?>
 				<li class="page-item">
-					<a class="page-link" href='?module=comments&page=<?=$total_pages?>'>Last</a>
+					<a class="page-link" href='?module=comments&page=<?= $total_pages?>'>Last</a>
 				</li>
 			</ul>
 		</div>
