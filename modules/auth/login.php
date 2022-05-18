@@ -22,6 +22,3 @@ if(isset($_POST['login'], $_POST['email'], $_POST['password'], $_POST['do_login'
 		$errorForm['enterError'] = $_POST['login'].' не найден в базе данных. Введите правильные данные или пройдите регистрацию';
 	}
 }
-/*if(isset($_POST['redirect_reg'])){
-	header('Location: index.php?module=auth&page=regin');
-}*/

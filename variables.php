@@ -1,6 +1,6 @@
 <?php
 $module = $_GET['module'] ?? 'static';
-$page = $_GET['page'] ?? 'main';
+$page = $_GET['action'] ?? 'main';
 $adminIp = '127.0.0.1';
 $adminVisability = $_SERVER['REMOTE_ADDR'] === $adminIp;
 

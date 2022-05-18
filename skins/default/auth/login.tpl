@@ -24,7 +24,7 @@
 			<p>Если вы еще не зарегистрированы, тогда нажмите здесь:</p>
 			<div class="btn btn-suc" style=" text-decoration: none;">
 				<a style=" text-decoration: none; color: white;"
-				   href="index.php?module=auth&page=regin">Зарегистрироваться</a>
+				   href="index.php?module=auth&action=regin">Зарегистрироваться</a>
 			</div>
 			<p></p>
 			<p>Вернуться на <a href="<?php echo $_SERVER['PHP_SELF']; ?>">главную</a>.</p>
