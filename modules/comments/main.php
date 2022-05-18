@@ -4,31 +4,30 @@
  */
 
 //Информацию из форм отправляем в БД:
-if (isset($_POST['username'], $_POST['comment'], $_POST['do_signup'])) {
+if (isset($_POST['do_signup'])) {
     $errors = [];
-    if (empty($_POST['username'])) {
+    $username = $_SESSION['username'] ?? $_POST['username'] ?? '';
+    $comment = $_POST['comment'] ?? '';
+    if (empty($username)) {
         $errors['username'] = 'Вы не заполнили логин';
     }
-    if (empty($_POST['comment'])) {
+    if (empty($comment)) {
         $errors['comment'] = 'Вы не заполнили комментарий';
-    } elseif (mb_strlen($_POST['comment'], 'UTF-8') < 50) {
+    } elseif (mb_strlen($comment, 'UTF-8') < 50) {
         $errors['comment'] = 'Длинна комментария меньше 50 символов!';
     }
-    if (!empty($_POST['username']) and !empty($_POST['comment'])) {
-        if (!count($errors)) {
-            if (empty($_SESSION['username'])) {
-                $_SESSION['username'] = $_POST['username'];
-                $username = mysqli_real_escape_string($link,$_POST['username']);
-            } else {
-                $username = mysqli_real_escape_string($link, $_SESSION['username']);
-            }
-            $comment = mysqli_real_escape_string($link, $_POST['comment']);
-            $query = "INSERT INTO comments SET name='$username', text='$comment'";
-            mysqli_query($link, $query) or exit(mysqli_error($link));
-            $_SESSION['commentOk'] = 'OK';
-            header("Location: index.php?module=comments&action=main");
-            exit();
+
+    if (!count($errors)) {
+        $username = mysqli_real_escape_string($link, $username);
+        if (empty($_SESSION['username'])) {
+            $_SESSION['username'] = $username;
         }
+        $comment = mysqli_real_escape_string($link, $comment);
+        $query = "INSERT INTO `comments` SET `name`='$username', `text`='$comment'";
+        mysqli_query($link, $query) or exit(mysqli_error($link));
+        $_SESSION['commentOk'] = 'OK';
+        header("Location: index.php?module=comments&action=main");
+        exit();
     }
 }
 if (isset($_POST['relogin'])) {
@@ -59,6 +58,6 @@ $commentResult = mysqli_query($link, "SELECT * FROM `comments`"); //запрос
 $commentCount = mysqli_num_rows($commentResult); // Получаем количество строк в БД
 
 //Считаем количество страниц:
-$total_pages = ceil($commentCount / $limit);
+$totalPages = ceil($commentCount / $limit);
 
 mysqli_close($link);

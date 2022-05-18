@@ -1,13 +1,12 @@
 <?php
 /**
- * @var $errors
+ * @var $errors array
  * @var $pageno integer
- * @var $total_pages integer
- * @var $commentCountSumm
- * @var $commentCountNull
+ * @var $totalPages integer
  * @var $comments array
  * @var $commentCount integer
- * @var $username
+ * @var $username string
+ * @var $offset integer
  */
 
 ?>
@@ -24,7 +23,7 @@
                     <?php
                     if (empty($_SESSION['username'])) { ?> <!--блок коментатора-->
 						<input type="text" class="form-control" name="username" id="loginReg"
-							   value="<?= @htmlspecialchars($_POST['username']);?>"
+							   value="<?= htmlspecialchars($_POST['username'] ?? '');?>"
 							   placeholder="Введите логин *"><br>
                         <?php
                         if (!empty($errors['username'])) { ?>
@@ -33,9 +32,8 @@
                         } ?>
                         <?php
                     } else { ?> <!--заканчивается 1 блок условие "если не зарегистрирован"-->
-						<input type="text" class="form-control" name="disabledusername" id="disabledTextInput"
-							   value=""
-							   placeholder="<?= @htmlspecialchars($_SESSION['username']); ?>" disabled><br>
+						<input type="text" class="form-control" name="username" id="disabledTextInput"
+							   placeholder="<?= htmlspecialchars($_SESSION['username']); ?>" disabled><br>
 						<p style="font-size:12px;">Для смены пользователя нажмите:
 							<button class="btn btn-suc" name="relogin" type="submit">Перезайти</button>
 						</p>
@@ -75,15 +73,15 @@
 				</p>
 				<div>
                     <?php
+					$currentCommentNumber = $commentCount - $offset;
                     foreach ($comments as $comment):?>
 						<div> <!--Блок вывода комментариев из БД:-->
 							# <?php
-                            if ($commentCount > 0) {
-                                echo $commentCount--;
+                            if ($currentCommentNumber > 0) {
+                                echo $currentCommentNumber--;
                             } ?> |
-							post ID: <u><?=$comment['id']?></u> |
-							user: <u><?=@htmlspecialchars($comment['name'])?></u> |
-							date: <u><?=$comment['date']?></u> | : <br>
+							user: <u><?= htmlspecialchars($comment['name'])?></u> |
+							date: <u><?= $comment['date']?></u> | : <br>
 							<i><?= nl2br(htmlspecialchars($comment['text']));?></i><br>
 						</div>
 						<p></p>
@@ -124,21 +122,21 @@
                         echo $pageno; ?></a>
 				</li>
                 <?php
-                if ($pageno < $total_pages): ?>
+                if ($pageno < $totalPages): ?>
 					<li class="page-item">
 						<a class="page-link" href="?module=comments&page=<?= ($pageno + 1); ?>">
                             <?= ($pageno + 1); ?></a>
 					</li>
                 <?php
                 endif;
-                if ($pageno < $total_pages): ?>
+                if ($pageno < $totalPages): ?>
 					<li class="page-item">
 						<a class="page-link" href="?module=comments&page=<?= ($pageno + 1); ?>">Next</a>
 					</li>
                 <?php
                 endif; ?>
 				<li class="page-item">
-					<a class="page-link" href='?module=comments&page=<?= $total_pages?>'>Last</a>
+					<a class="page-link" href='?module=comments&page=<?= $totalPages?>'>Last</a>
 				</li>
 			</ul>
 		</div>
