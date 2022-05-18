@@ -60,4 +60,6 @@ $commentCount = mysqli_num_rows($commentResult); // Получаем колич�
 //Считаем количество страниц:
 $totalPages = ceil($commentCount / $limit);
 
+$currentCommentNumber = $commentCount - $offset;
+
 mysqli_close($link);

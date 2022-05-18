@@ -7,6 +7,7 @@
  * @var $commentCount integer
  * @var $username string
  * @var $offset integer
+ * @var $currentCommentNumber integer
  */
 
 ?>
@@ -17,45 +18,35 @@
 			<h2>ОТЗЫВЫ</h2>
 			<h5>Если Вы остались довольны услугами <span>"AGRO.UNITED"</span> или вам что-то не понравилось,
 				то можете оставить свой комметарий</h5>
-            <?php
-            if (!isset($_SESSION['commentOk'])) { ?>
+            <?php if (!isset($_SESSION['commentOk'])) { ?>
 				<form action="" method="post">
-                    <?php
-                    if (empty($_SESSION['username'])) { ?> <!--блок коментатора-->
+                    <?php if (empty($_SESSION['username'])) { ?> <!--блок коментатора-->
 						<input type="text" class="form-control" name="username" id="loginReg"
 							   value="<?= htmlspecialchars($_POST['username'] ?? '');?>"
 							   placeholder="Введите логин *"><br>
-                        <?php
-                        if (!empty($errors['username'])) { ?>
+                        <?php if (!empty($errors['username'])) { ?>
 							<span style="color:red"><?=$errors['username']?></span><br>
-                            <?php
-                        } ?>
-                        <?php
-                    } else { ?> <!--заканчивается 1 блок условие "если не зарегистрирован"-->
+                            <?php } ?>
+                        <?php } else { ?> <!--заканчивается 1 блок условие "если не зарегистрирован"-->
 						<input type="text" class="form-control" name="username" id="disabledTextInput"
 							   placeholder="<?= htmlspecialchars($_SESSION['username']); ?>" disabled><br>
 						<p style="font-size:12px;">Для смены пользователя нажмите:
 							<button class="btn btn-suc" name="relogin" type="submit">Перезайти</button>
 						</p>
-                        <?php
-                    } ?> <!--заканчивается 2 блок условие "если зарегистрирован"-->
+                        <?php } ?> <!--заканчивается 2 блок условие "если зарегистрирован"-->
 					<p></p>
 					<textarea class="form-control" name="comment"
 							  placeholder="Оставьте свой комментарий *"></textarea><br>
-                    <?php
-                    if (!empty($errors['comment'])): ?>
+                    <?php if (!empty($errors['comment'])): ?>
 						<span style="color:red"><?=$errors['comment']?></span><br>
-                    <?php
-                    endif ?>
+                    <?php endif ?>
 					<p style="font-size:12px;">* - поле обязательное для заполнения</p>
 					<button class="btn btn-suc" name="do_signup" type="submit">Отправить</button>
 				</form>
-                <?php
-            } else {
+                <?php } else {
                 unset($_SESSION['commentOk']); ?>
 				<div>Спасибо за оставленный комментарий!</div>
-                <?php
-            } ?>
+                <?php } ?>
 			<br>
 		</div>
 	</div>
@@ -72,9 +63,7 @@
                         : 'Комментариев пока еще нет, вы будете первым';?>
 				</p>
 				<div>
-                    <?php
-					$currentCommentNumber = $commentCount - $offset;
-                    foreach ($comments as $comment):?>
+                    <?php foreach ($comments as $comment):?>
 						<div> <!--Блок вывода комментариев из БД:-->
 							# <?php
                             if ($currentCommentNumber > 0) {
@@ -85,8 +74,7 @@
 							<i><?= nl2br(htmlspecialchars($comment['text']));?></i><br>
 						</div>
 						<p></p>
-                    <?php
-                    endforeach; ?>
+                    <?php endforeach; ?>
 				</div>
 			</div>
 			<br>
@@ -101,25 +89,21 @@
 				<li class="page-item">
 					<a class="page-link" href="?module=comments&page=1">First</a>
 				</li>
-                <?php
-                if ($pageno > 1): ?>
+                <?php if ($pageno > 1): ?>
 					<li class="page-item">
 						<a class="page-link" href="?module=comments&page=
 							<?= ($pageno - 1); ?>">Prev</a>
 					</li>
-                <?php
-                endif;
+                <?php endif;
                 if ($pageno > 1): ?>
 					<li class="page-item">
 						<a class="page-link" href="?module=comments&page=<?= ($pageno - 1); ?>">
                             <?= ($pageno - 1); ?></a>
 					</li>
-                <?php
-                endif; ?>
+                <?php endif; ?>
 				<li class="page-item">
 					<a class="page-link" href="?module=comments&page=<?= $pageno; ?>">
-                        <?php
-                        echo $pageno; ?></a>
+                        <?= $pageno; ?></a>
 				</li>
                 <?php
                 if ($pageno < $totalPages): ?>
@@ -127,14 +111,12 @@
 						<a class="page-link" href="?module=comments&page=<?= ($pageno + 1); ?>">
                             <?= ($pageno + 1); ?></a>
 					</li>
-                <?php
-                endif;
+                <?php endif;
                 if ($pageno < $totalPages): ?>
 					<li class="page-item">
 						<a class="page-link" href="?module=comments&page=<?= ($pageno + 1); ?>">Next</a>
 					</li>
-                <?php
-                endif; ?>
+                <?php endif; ?>
 				<li class="page-item">
 					<a class="page-link" href='?module=comments&page=<?= $totalPages?>'>Last</a>
 				</li>
