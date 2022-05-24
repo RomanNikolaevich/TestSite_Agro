@@ -2,11 +2,11 @@
 	<div class="conteiner-content3">
 		<nav class="container-nav2">
 			<div class="item3"><a href="index.php">main</a></div>
-			<div class="item3"><a href="index.php?action=aboutus">about us</a></div>
-			<div class="item3"><a href="index.php?action=services">services</a></div>
-			<div class="item3"><a href="index.php?action=products">products</a></div>
-			<div class="item3"><a href="index.php?action=partners">partners</a></div>
-			<div class="item3"><a href="index.php?action=contacts">contacts</a></div>
+            <div class="item3"><a href="index.php?module=news">news</a></div>
+			<div class="item3"><a href="index.php?page=services">services</a></div>
+			<div class="item3"><a href="index.php?page=products">products</a></div>
+			<div class="item3"><a href="index.php?page=partners">partners</a></div>
+			<div class="item3"><a href="index.php?page=contacts">contacts</a></div>
 		</nav>
 		<div class="conteiner-content-block5">
 			<h3>What's Happening on Facebook</h3>

@@ -87,38 +87,38 @@
 		<div class="col">
 			<ul class="pagination">
 				<li class="page-item">
-					<a class="page-link" href="?module=comments&page=1">First</a>
+					<a class="page-link" href="?module=comments&pageno=1">First</a>
 				</li>
                 <?php if ($pageno > 1): ?>
 					<li class="page-item">
-						<a class="page-link" href="?module=comments&page=
+						<a class="page-link" href="?module=comments&pageno=
 							<?= ($pageno - 1); ?>">Prev</a>
 					</li>
                 <?php endif;
                 if ($pageno > 1): ?>
 					<li class="page-item">
-						<a class="page-link" href="?module=comments&page=<?= ($pageno - 1); ?>">
+						<a class="page-link" href="?module=comments&pageno=<?= ($pageno - 1); ?>">
                             <?= ($pageno - 1); ?></a>
 					</li>
                 <?php endif; ?>
 				<li class="page-item">
-					<a class="page-link" href="?module=comments&page=<?= $pageno; ?>">
+					<a class="page-link" href="?module=comments&pageno=<?= $pageno; ?>">
                         <?= $pageno; ?></a>
 				</li>
                 <?php
                 if ($pageno < $totalPages): ?>
 					<li class="page-item">
-						<a class="page-link" href="?module=comments&page=<?= ($pageno + 1); ?>">
+						<a class="page-link" href="?module=comments&pageno=<?= ($pageno + 1); ?>">
                             <?= ($pageno + 1); ?></a>
 					</li>
                 <?php endif;
                 if ($pageno < $totalPages): ?>
 					<li class="page-item">
-						<a class="page-link" href="?module=comments&page=<?= ($pageno + 1); ?>">Next</a>
+						<a class="page-link" href="?module=comments&pageno=<?= ($pageno + 1); ?>">Next</a>
 					</li>
                 <?php endif; ?>
 				<li class="page-item">
-					<a class="page-link" href='?module=comments&page=<?= $totalPages?>'>Last</a>
+					<a class="page-link" href='?module=comments&pageno=<?= $totalPages?>'>Last</a>
 				</li>
 			</ul>
 		</div>

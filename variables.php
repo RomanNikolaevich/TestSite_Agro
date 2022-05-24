@@ -1,6 +1,6 @@
 <?php
 $module = $_GET['module'] ?? 'static';
-$page = $_GET['action'] ?? 'main';
+$page = $_GET['page'] ?? 'main';
 $adminIp = '127.0.0.1';
 $adminVisability = $_SERVER['REMOTE_ADDR'] === $adminIp;
 
@@ -15,5 +15,13 @@ if(!file_exists($modulePath)) {
 	$modulePath = __DIR__.'/modules/errors/404.php';
 	$pagePath = __DIR__.'/skins/'.SKIN.'/errors/404.tpl';
 }
+//убираем пробелы в начале и конце строки в POST
+//временно закомментим - в последующих уроках ее немного изменим
+//обработка трима сделать в add.php
+/*if(isset($_POST) && count($_POST)) {
+    foreach ($_POST as $k => $v) {
+        $_POST[$k] = trim($v);
+    }
+}*/
 
 include_once $modulePath;

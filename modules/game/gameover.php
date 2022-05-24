@@ -7,6 +7,6 @@ if($_SESSION['server'] < 1) {
 
 if(!empty ($_POST['regame'])) {
 	session_destroy();
-	header('Location: index.php?module=game&action=game', true, 303);
+	header('Location: /index.php?module=game&page=game', true, 303);
 	exit;
 }

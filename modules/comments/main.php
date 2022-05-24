@@ -13,7 +13,7 @@ if (isset($_POST['do_signup'])) {
     }
     if (empty($comment)) {
         $errors['comment'] = 'Вы не заполнили комментарий';
-    } elseif (mb_strlen($comment, 'UTF-8') < 50) {
+    } elseif (mb_strlen($comment) < 50) {
         $errors['comment'] = 'Длинна комментария меньше 50 символов!';
     }
 
@@ -26,17 +26,17 @@ if (isset($_POST['do_signup'])) {
         $query = "INSERT INTO `comments` SET `name`='$username', `text`='$comment'";
         mysqli_query($link, $query) or exit(mysqli_error($link));
         $_SESSION['commentOk'] = 'OK';
-        header("Location: index.php?module=comments&action=main");
+        header("Location: /index.php?module=comments&page=main");
         exit();
     }
 }
 if (isset($_POST['relogin'])) {
     unset ($_SESSION['username']);
-    header("Location: index.php?module=comments&action=main");
+    header("Location: /index.php?module=comments&page=main");
 }
 
 //пагинатор - поверка, есть ли GET запрос
-$pageno = $_GET['page'] ?? 1;
+$pageno = $_GET['pageno'] ?? 1;
 // LIMIT задаёт лимит записей
 $limit = 5;
 //OFFSET задает количество строк, которые нужно пропустить.
@@ -59,7 +59,5 @@ $commentCount = mysqli_num_rows($commentResult); // Получаем колич�
 
 //Считаем количество страниц:
 $totalPages = ceil($commentCount / $limit);
-
+//Для расчета нумерации комментариев с учетом смены страниц пагинатором.
 $currentCommentNumber = $commentCount - $offset;
-
-mysqli_close($link);

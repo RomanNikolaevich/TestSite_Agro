@@ -17,7 +17,7 @@ if(isset($_POST['login'], $_POST['email'], $_POST['password'], $_POST['do_login'
 		$_SESSION['access'] = 1;
 		$_SESSION['login'] = $_POST['login'];
 		setcookie('access', 1, time() + 3600, '/');
-		header('Location: index.php');
+		header('Location: /index.php');
 	} else {
 		$errorForm['enterError'] = $_POST['login'].' не найден в базе данных. Введите правильные данные или пройдите регистрацию';
 	}
