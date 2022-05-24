@@ -13,7 +13,8 @@
                 </div>
                 <div>
                     Описание новости:
-                    <textarea class="form-control" name="description"><?= htmlspecialchars($row['description']); ?></textarea>
+                    <textarea class="form-control" name="description"><?=
+                        htmlspecialchars($row['description']); ?></textarea>
                 </div>
                 <div>
                     Полный текст новости:

@@ -68,8 +68,6 @@ span {
   text-decoration: solid;
 }
 
-
-
 .container-logo {
   display: flex;
   justify-content: flex-start;
@@ -80,7 +78,6 @@ span {
 .conteiner-content {
   display: flex;
   justify-content: center;
-
 }
 
 .conteiner-content2 {
@@ -89,7 +86,6 @@ span {
   margin: 0 0 -16px 0;
   padding: 0 0 0 89px;
 }
-
 
 .conteiner-content-block {
   margin: 40px 15px;
@@ -204,4 +200,13 @@ span {
   background-color: orange;
   border-color: #ed8f0ddb;
   text-decoration: none;
+}
+
+.card-columns {
+@include media-breakpoint-only(lg) {
+    column-count: 2;
+}
+@include media-breakpoint-only(xl) {
+    column-count: 5;
+}
 }

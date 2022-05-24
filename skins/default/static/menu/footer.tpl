@@ -3,8 +3,8 @@
 		<nav class="container-nav2">
 			<div class="item3"><a href="index.php">main</a></div>
             <div class="item3"><a href="index.php?module=news">news</a></div>
+            <div class="item3"><a href="index.php?module=goods">goods</a></div>
 			<div class="item3"><a href="index.php?page=services">services</a></div>
-			<div class="item3"><a href="index.php?page=products">products</a></div>
 			<div class="item3"><a href="index.php?page=partners">partners</a></div>
 			<div class="item3"><a href="index.php?page=contacts">contacts</a></div>
 		</nav>

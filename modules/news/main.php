@@ -1,19 +1,12 @@
 <?php
 //удаление новости:
 if (isset($_POST['delete'])){
-    $_POST['ids'] = array();
-    //циклом прогоняем массив, чтобы привести его к типу число (int):
     foreach($_POST['ids'] as $k=>$v) {
-        $_POST['ids'][$k]
-            = (int)$v;
+        mysqli_query($link,"
+		DELETE FROM `news`
+		WHERE `id` = ".(int)$v."
+	");
     }
-    //wtf($_POST['ids'],1); //выведет на экран массив
-    $ids = implode(',', $_POST['ids']);
-    //wtf($ids); // выведет на экран 3, 2, 1
-    mysqli_query($link,"
-			DELETE FROM `news`
-			WHERE `id` IN ".$ids."
-		") or exit(mysqli_error());
 }
 
 if(isset($_GET['action']) && $_GET['action']=='delete'){
