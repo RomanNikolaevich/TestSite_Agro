@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var $link
+ */
 if(isset($_POST['ok'], $_POST['title'], $_POST['text'], $_POST['cat'], $_POST['description'])) {
     mysqli_query($link, "
 		UPDATE `news` SET

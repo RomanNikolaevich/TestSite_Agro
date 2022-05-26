@@ -7,6 +7,6 @@ define('ADMINEMAIL', 'roma@gmail.com');
 define('ADMINPASS', '123123');
 
 define('DB_HOST', 'localhost');
-define('DB_LOGIN', 'root');
-define('DB_PASS', 'root');
-define('DB_NAME', 'agrodb');
+define('DB_LOGIN', 'roman');
+define('DB_PASS', 'yAjD8lu4SHe');
+define('DB_NAME', 'roman');

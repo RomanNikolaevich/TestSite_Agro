@@ -1,7 +1,7 @@
 <?php
 $module = $_GET['module'] ?? 'static';
 $page = $_GET['page'] ?? 'main';
-$adminIp = '127.0.0.1';
+$adminIp = '46.229.57.116';
 $adminVisability = $_SERVER['REMOTE_ADDR'] === $adminIp;
 
 if($_SERVER['REMOTE_ADDR'] !== $adminIp && $page === 'login') {
