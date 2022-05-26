@@ -15,7 +15,6 @@
                 Категория товара (выберите из списка):
                 <select class="form-control" name="cat" selected="selected">
                     <?php
-                    $category = $row['cat'];
                     $category = [
                             'Азотные удобрения',
                             'Фосфорные удобрения',

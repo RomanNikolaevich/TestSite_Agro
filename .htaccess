@@ -1,5 +1,9 @@
 AddDefaultCharset UTF-8
 php_flag display_errors ON
+php_value mbstring.internal_encoding UTF-8
+php_flag magic_quotes_gpc off
+php_flag magic_quotes_rubtime off
+php_flag register_globals off
 
 #RewriteEngine On
 #RewriteBase /
