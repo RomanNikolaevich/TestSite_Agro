@@ -6,14 +6,14 @@ function wtf($variable, $stop = false) {
 		exit();
 	}
 }
-//
+//Выводим обработку ошибок
 function q($quary) {
     global $link;
     $result = mysqli_query($link, $quary);
     if($result === false) {
-        //$info = debug_backtrace();
+        $info = debug_backtrace($result);
         //wtf($info);//распечатка ошибки на экран
-        echo "Запрос: ".$quary.'<br>'.mysqli_error($link);//дебаг(перехват ошибки)
+        echo "Запрос: ".$quary.'<br>'.mysqli_error($link).'<br>'.wtf($info) ;//дебаг(перехват ошибки)
         //отправляем на почту письмо об ошибке (учить будем это в последующих уроках)
         //записываем ошибку в логи:
         //file_put_contents('./logs/mysql.log', strip_tags($query)."\n\n", FILE_APPEND);
@@ -21,8 +21,7 @@ function q($quary) {
     } else {
         return $result; // запрос составлен верно, то вернем на страницу $result
     }
-}
-// пример применения: $res = q("SELECT * FROM `users` ORDER BY `id`");
+} // пример применения: $result = q("SELECT * FROM `users` ORDER BY `id`");
 
 //Удаляет пробелы (или другие символы) из начала и конца строки
 function trim_array($elem) {

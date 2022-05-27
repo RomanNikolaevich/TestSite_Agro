@@ -44,8 +44,7 @@ $offset = ($pageno - 1) * $limit;
 
 $comments = getComments($link, $limit, $offset);
 
-function getComments($link, int $limit, int $offset)
-{
+function getComments($link, int $limit, int $offset) {
     $commentQuery = "SELECT * FROM `comments` ORDER BY `date` DESC LIMIT $limit OFFSET $offset";
     $commentResult = mysqli_query($link, $commentQuery);
     $comments = mysqli_fetch_all($commentResult, MYSQLI_ASSOC);
