@@ -6,17 +6,21 @@ function wtf($variable, $stop = false) {
 		exit();
 	}
 }
+
 //Выводим обработку ошибок
-function q($quary) {
+function q($query) {
     global $link;
-    $result = mysqli_query($link, $quary);
+    $result = mysqli_query($link, $query);
     if($result === false) {
-        $info = debug_backtrace($result);
+        $info = debug_backtrace();
+        $date= date("Y-m-d H:i:s");
         //wtf($info);//распечатка ошибки на экран
-        echo "Запрос: ".$quary.'<br>'.mysqli_error($link).'<br>'.wtf($info) ;//дебаг(перехват ошибки)
+        $log = $date."  QUERY: ".$query.'<br>'.mysqli_error($link).'<br>'.'FILE: '.$info[0]['file'].
+            ' LINE: '.$info[0]['line'];//дебаг(перехват ошибки)
+        echo $log;
         //отправляем на почту письмо об ошибке (учить будем это в последующих уроках)
         //записываем ошибку в логи:
-        //file_put_contents('./logs/mysql.log', strip_tags($query)."\n\n", FILE_APPEND);
+        file_put_contents('./logs/mysql.log', strip_tags($log)."\n\n", FILE_APPEND);
         exit(); //остановим код
     } else {
         return $result; // запрос составлен верно, то вернем на страницу $result
@@ -74,4 +78,37 @@ function hsc($elem) {
         $elem = array_map('hsc', $elem);
     }
     return $elem;
+}
+
+function getComments($link, int $limit, int $offset) {
+    $commentQuery = "SELECT * FROM `comments` ORDER BY `date` DESC LIMIT $limit OFFSET $offset";
+    $commentResult = mysqli_query($link, $commentQuery);
+    $comments = mysqli_fetch_all($commentResult, MYSQLI_ASSOC);
+
+    return $comments;
+}
+
+//блок спама через набор символов
+function validateName($comment) {
+    global $errors;
+    $badWords = '/\.com|\.ru|\.net|\.xyz|\.html|\.https|\.club|\.http|\.url|\.by/i';
+    $match = preg_match($badWords, $comment);
+
+    if($match) {
+         $errors['comment'] = 'Ваш комментарий был отклонен, так как вы используете запрещенные слова';
+         //return false;
+    } /*else {
+        return true;
+    }*/
+}
+//блок спама стоп слов через массив - не работает - доделать позже
+function containsStopWord($comment) {
+    global $errors;
+    $stopWords = array ('.com', '.ru','.net','.xyz', 'https','club', 'порно', 'porno', 'пoрнo');
+    foreach ($stopWords as $stopWord) {
+        if (mb_stripos($comment, $stopWord) === true)
+            $errors['comment'] = 'Ваш комментарий был отклонен, так как вы используете запрещенные слова';
+            //return false;
+    }
+    //return true;
 }

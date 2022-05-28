@@ -1,0 +1,2 @@
+2022-05-28 17:59:18  QUERY: SELECT * FROM `commments`Table 'roman.commments' doesn't existFILE: E:\INET\OpenServer\domains\testphpagro1.ua\modules\comments\main.php LINE: 51
+

@@ -8,6 +8,7 @@ if (isset($_POST['do_signup'])) {
     $errors = [];
     $username = $_SESSION['username'] ?? $_POST['username'] ?? '';
     $comment = $_POST['comment'] ?? '';
+
     if (empty($username)) {
         $errors['username'] = 'Вы не заполнили логин';
     }
@@ -16,6 +17,8 @@ if (isset($_POST['do_signup'])) {
     } elseif (mb_strlen($comment) < 50) {
         $errors['comment'] = 'Длинна комментария меньше 50 символов!';
     }
+
+     validateName($comment);
 
     if (!count($errors)) {
         $username = mysqli_real_escape_string($link, $username);
@@ -44,16 +47,8 @@ $offset = ($pageno - 1) * $limit;
 
 $comments = getComments($link, $limit, $offset);
 
-function getComments($link, int $limit, int $offset) {
-    $commentQuery = "SELECT * FROM `comments` ORDER BY `date` DESC LIMIT $limit OFFSET $offset";
-    $commentResult = mysqli_query($link, $commentQuery);
-    $comments = mysqli_fetch_all($commentResult, MYSQLI_ASSOC);
-
-    return $comments;
-}
-
 //счетчик комментариев:
-$commentResult = mysqli_query($link, "SELECT * FROM `comments`"); //запрос к БД комментов
+$commentResult = q("SELECT * FROM `comments`"); //запрос к БД комментов
 $commentCount = mysqli_num_rows($commentResult); // Получаем количество строк в БД
 
 //Считаем количество страниц:
