@@ -10,3 +10,15 @@ define('DB_HOST', 'localhost');
 define('DB_LOGIN', 'roman');
 define('DB_PASS', 'yAjD8lu4SHe');
 define('DB_NAME', 'roman');
+/*
+class Core {
+    static $CREATED    = 2022; //можно пробелами выравнивать в столбик, без табов!
+    static $SKIN       = 'default';
+    static $ADMINLOGIN = 'Roman';
+    static $ADMINEMAIL = 'roma@gmail.com';
+    static $ADMINPASS = 123123;
+    static $DB_HOST = 'localhost';
+    static $DB_LOGIN= 'roman';
+    static $DB_PASS = 'yAjD8lu4SHe';
+    static $DB_NAME = 'roman';
+}*/
