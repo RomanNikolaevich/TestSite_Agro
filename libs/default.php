@@ -1,4 +1,9 @@
 <?php
+//аутолоадер классов:
+spl_autoload_register(function ($class) {
+	include './libs/class_'.$class .'.php';
+});
+
 //Функция вывода на экран:
 function wtf($variable, $stop = false) {
 	echo '<pre>'.print_r($variable, 1).'</pre>';
@@ -28,7 +33,7 @@ function q($query) {
 } // пример применения: $result = q("SELECT * FROM `users` ORDER BY `id`");
 
 //Удаляет пробелы (или другие символы) из начала и конца строки
-function trim_array($elem) {
+function trimArray($elem) {
     if(!is_array($elem)) { //если это не массив
         $elem = trim($elem); //то мы его обработаем тримом
     } else {
@@ -38,7 +43,7 @@ function trim_array($elem) {
 }
 
 //Приводим к числу
-function int_array($elem) {
+function intArray($elem) {
     if(!is_array($elem)) {
         $elem = (int)$elem; //приводим к типу int
     } else {
@@ -49,7 +54,7 @@ function int_array($elem) {
 }
 
 //Приводим к float
-function float_array($elem) {
+function floatArray($elem) {
     if(!is_array($elem)) {
         $elem = (float)$elem; //приводим к типу float
     } else {
