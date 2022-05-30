@@ -12,7 +12,7 @@ function wtf($variable, $stop = false) {
 	}
 }
 
-//Выводим обработку ошибок
+//Запрос к БД с выводим ошибок
 function q($query) {
     global $link;
     $result = mysqli_query($link, $query);
@@ -20,7 +20,9 @@ function q($query) {
         $info = debug_backtrace();
         $date= date("Y-m-d H:i:s");
         //wtf($info);//распечатка ошибки на экран
-        $log = $date."  QUERY: ".$query.'<br>'.mysqli_error($link).'<br>'.'FILE: '.$info[0]['file'].
+        $log = $date."  QUERY: ".$query.'<br>'
+			.mysqli_error($link).'<br>'
+			.'FILE: '.$info[0]['file'].
             ' LINE: '.$info[0]['line'];//дебаг(перехват ошибки)
         echo $log;
         //отправляем на почту письмо об ошибке (учить будем это в последующих уроках)
@@ -45,9 +47,9 @@ function trimArray($elem) {
 //Приводим к числу
 function intArray($elem) {
     if(!is_array($elem)) {
-        $elem = (int)$elem; //приводим к типу int
+        $elem = (int)($elem); //приводим к типу int
     } else {
-        $elem = array_map('int_array', $elem);
+        $elem = array_map('intArray', $elem);
         // делаем замыкание функции самой себя и каждый раз залазит глубже в массив
     }
     return $elem; //массив не будем трогать
@@ -56,9 +58,9 @@ function intArray($elem) {
 //Приводим к float
 function floatArray($elem) {
     if(!is_array($elem)) {
-        $elem = (float)$elem; //приводим к типу float
+        $elem = (float)($elem); //приводим к типу float
     } else {
-        $elem = array_map('float_array', $elem);
+        $elem = array_map('floatArray', $elem);
     }
     return $elem; //массив не будем трогать
 }
