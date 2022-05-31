@@ -9,11 +9,11 @@ if($_SERVER['REMOTE_ADDR'] !== $adminIp && $page === 'login') {
 }
 
 $modulePath = __DIR__.'/modules/'.$module.'/'.$page.'.php';
-$pagePath = __DIR__.'/skins/'.SKIN.'/'.$module.'/'.$page.'.tpl';
+$pagePath = __DIR__.'/skins/'.Core::$SKIN.'/'.$module.'/'.$page.'.tpl';
 
 if(!file_exists($modulePath)) {
 	$modulePath = __DIR__.'/modules/errors/404.php';
-	$pagePath = __DIR__.'/skins/'.SKIN.'/errors/404.tpl';
+	$pagePath = __DIR__.'/skins/'.Core::$SKIN.'/errors/404.tpl';
 }
 
 include_once $modulePath;

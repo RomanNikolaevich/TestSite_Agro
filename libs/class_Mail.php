@@ -3,14 +3,14 @@
 class class_Mail
 {
 	public static string $subject = 'Вы зарегистрировались на нашем сайте'; //по умолчанию
-	public static string $from = 'inpost@list.ru';
-	public static string $to = 'roman.nikolaevich@gmail.com';
-	public static $text = 'Шаблонное письмо';
-	public static $headers = '';
+	public static string $from = 'roman.nikolaevich@gmail.com';
+	public static string $to = 'qintrony@gmail.com';
+	public static string $text = 'Шаблонное письмо';
+	public static string $headers = '';
 
 	public static function testSend()
 	{
-		if (mail(self::$to, 'english words', 'eglisnh words')) {
+		if (mail(self::$to, 'english words', 'english words')) {
 			echo 'Письмо отправилось';
 		} else {
 			echo 'Письмо не отправилось';

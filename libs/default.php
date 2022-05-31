@@ -1,7 +1,7 @@
 <?php
 //аутолоадер классов:
 spl_autoload_register(function ($class) {
-	include './libs/class_'.$class .'.php';
+	include './libs/'.$class .'.php';
 });
 
 //Функция вывода на экран:
@@ -98,7 +98,7 @@ function getComments($link, int $limit, int $offset) {
 //блок спама через набор символов
 function validateName($comment) {
     global $errors;
-    $badWords = '/\.com|\.ru|\.net|\.xyz|\.html|\.https|\.club|\.http|\.url|\.by/i';
+    $badWords = '/\.com|\.ru|\.net|\.xyz|\.html|\.https|\.club|\.http|\.httр|\.httрs|\.url|\.org|\.by/i';
     $match = preg_match($badWords, $comment);
 
     if($match) {
@@ -118,4 +118,11 @@ function containsStopWord($comment) {
             //return false;
     }
     //return true;
+}
+
+function myHash($var) {
+	$salt = 'ABC';
+	$salt2 = 'CBA';
+	$var = crypt(md5($var.$salt), $salt2);
+	return $var;
 }

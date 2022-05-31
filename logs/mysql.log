@@ -1,2 +1,11 @@
 2022-05-28 17:59:18  QUERY: SELECT * FROM `commments`Table 'roman.commments' doesn't existFILE: E:\INET\OpenServer\domains\testphpagro1.ua\modules\comments\main.php LINE: 51
 
+2022-05-31 14:21:17  QUERY: 
+		INSERT INTO `users` SET
+		`login`    = 'offstage',
+		`password` = 'CB/hUFa6knf6s',
+		`email`    = 'roman.nikolaevich@gmail.com',
+		`age`      = 28,
+		`hash`     = CBw6bsStOikfc`
+		You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`' at line 6FILE: E:\INET\OpenServer\domains\testphpagro1.ua\modules\auth\regin.php LINE: 62
+

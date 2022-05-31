@@ -1,18 +1,28 @@
 <?php
-if(isset($_POST['login'], $_POST['email'], $_POST['password'], $_POST['do_login'])) {
+if (!isset($_SESSION['user']) || $_SESSION['user']['access'] != 1 {
+	exit();
+}
+
+if(isset($_POST['login'], $_POST['password'], $_POST['do_login'])) {
 	if(!empty($_POST['login'])) {
-		if (!preg_match("/^[a-zA-Z]*$/", $_POST['login'])) {
-			$errorForm['loginError'] = "В логине допускаются только латинские буквы";
+		$res = q("
+		SELECT *
+		FROM `users`
+		WHERE `login` = '".mres($_POST['login'])."'
+			AND `password` = '".myHash($_POST['pass'])."'
+			AND `active` = 1
+			LIMIT 1
+	");
+
+		if(mysqli_num_rows($res)) {
+			$_SESSION['user'] = mysqli_fetch_assoc($res);
+			$status = 'OK!';
+		} else {
+			$error = 'Нет пользователя с таким логином и паролем';
 		}
-	}
-	if(!empty($_POST['email'])) {
-		if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-			$errorForm['emailError'] = "Почтовый адресс введен не верно!";
-		}
-	}
-	if(($_POST['login'] === ADMINLOGIN)
-		&& ($_POST['email'] === ADMINEMAIL)
-		&& ($_POST['password'] === ADMINPASS)
+
+	if(($_POST['login'] === Core::$ADMINLOGIN)
+		&& ($_POST['password'] === Core::$ADMINPASS)
 	) {
 		$_SESSION['access'] = 1;
 		$_SESSION['login'] = $_POST['login'];
@@ -22,3 +32,5 @@ if(isset($_POST['login'], $_POST['email'], $_POST['password'], $_POST['do_login'
 		$errorForm['enterError'] = $_POST['login'].' не найден в базе данных. Введите правильные данные или пройдите регистрацию';
 	}
 }
+}
+

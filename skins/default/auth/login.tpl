@@ -11,9 +11,7 @@
 			<form method="post">
 				<input type="text" class="form-control" name="login" id="login" placeholder="Введите логин"
 					   value="<?php echo $_POST['login'] ?? '' ?>" required><br>
-				<input type="email" class="form-control" name="email" id="email"
-					   value="<?php echo $_POST['email'] ?? '' ?>" placeholder="Введите Email" required><br>
-				<input type="password" class="form-control" name="password" id="password" placeholder="Введите пароль"
+                <input type="password" class="form-control" name="password" id="password" placeholder="Введите пароль"
 					   required><br>
 				<button class="btn btn-suc" name="do_login" type="submit">Авторизоваться</button>
 			</form>

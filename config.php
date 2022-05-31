@@ -1,5 +1,19 @@
 <?php
-define('CREATED',2022);
+
+class Core {
+    static $CREATED    = 2022; //можно пробелами выравнивать в столбик, без табов!
+    static $SKIN       = 'default';
+    static $ADMINLOGIN = 'Roman';
+    static $ADMINEMAIL = 'roma@gmail.com';
+    static $ADMINPASS  = 123123;
+    static $DB_HOST    = 'localhost';
+    static $DB_LOGIN   = 'roman';
+    static $DB_PASS    = 'yAjD8lu4SHe';
+    static $DB_NAME    = 'roman';
+    static $DOMAIN     = 'https://roman.school-php.com/';
+}
+
+/*define('CREATED',2022);
 define('SKIN','default');//это константа для смены скинов, если будет еще скины вдруг
 
 define('ADMINLOGIN', 'Roman');
@@ -9,16 +23,4 @@ define('ADMINPASS', '123123');
 define('DB_HOST', 'localhost');
 define('DB_LOGIN', 'roman');
 define('DB_PASS', 'yAjD8lu4SHe');
-define('DB_NAME', 'roman');
-/*
-class Core {
-    static $CREATED    = 2022; //можно пробелами выравнивать в столбик, без табов!
-    static $SKIN       = 'default';
-    static $ADMINLOGIN = 'Roman';
-    static $ADMINEMAIL = 'roma@gmail.com';
-    static $ADMINPASS = 123123;
-    static $DB_HOST = 'localhost';
-    static $DB_LOGIN= 'roman';
-    static $DB_PASS = 'yAjD8lu4SHe';
-    static $DB_NAME = 'roman';
-}*/
+define('DB_NAME', 'roman');*/

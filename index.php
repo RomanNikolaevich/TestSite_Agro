@@ -12,4 +12,5 @@ include_once './libs/default.php';
 include_once './variables.php';
 
 // Роутер
-include './skins/'.SKIN.'/index.tpl'; //шаблон
+include './modules/allpages.php';
+include './skins/'.Core::$SKIN.'/index.tpl'; //шаблон

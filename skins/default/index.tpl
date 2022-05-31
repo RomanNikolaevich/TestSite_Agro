@@ -16,11 +16,11 @@
 </head>
 <body>
 <div class="block">
-  <?php include './skins/'.SKIN.'/static/menu/header.tpl'; ?>
+  <?php include './skins/'.Core::$SKIN.'/static/menu/header.tpl'; ?>
   <?php include $pagePath; ?>
 
   <div class="conteiner-content">
-    <?php include './skins/'.SKIN.'/static/menu/footer.tpl'; ?>
+    <?php include './skins/'.Core::$SKIN.'/static/menu/footer.tpl'; ?>
   </div>
 </div>
 </body>
