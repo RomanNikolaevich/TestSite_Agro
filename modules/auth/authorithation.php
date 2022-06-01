@@ -1,5 +1,5 @@
 <?php
-if (!isset($_SESSION['user']) || $_SESSION['user']['access'] != 1 {
+if (!isset($_SESSION['user']) || $_SESSION['user']['access'] != 1) {
 	exit();
 }
 

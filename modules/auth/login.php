@@ -1,5 +1,5 @@
 <?php
-if (!isset($_SESSION['user']) || $_SESSION['user']['access'] != 1 {
+if (!isset($_SESSION['user']) || $_SESSION['user']['access'] != 1) {
 	exit();
 }
 
@@ -21,16 +21,17 @@ if(isset($_POST['login'], $_POST['password'], $_POST['do_login'])) {
 			$error = 'Нет пользователя с таким логином и паролем';
 		}
 
-	if(($_POST['login'] === Core::$ADMINLOGIN)
-		&& ($_POST['password'] === Core::$ADMINPASS)
+
+}
+}
+
+/*if(($_POST['login'] === Core::$ADMINLOGIN)
+	&& ($_POST['password'] === Core::$ADMINPASS)
 	) {
 		$_SESSION['access'] = 1;
 		$_SESSION['login'] = $_POST['login'];
 		setcookie('access', 1, time() + 3600, '/');
 		header('Location: /index.php');
-	} else {
-		$errorForm['enterError'] = $_POST['login'].' не найден в базе данных. Введите правильные данные или пройдите регистрацию';
-	}
-}
-}
-
+} else {
+	$errorForm['enterError'] = $_POST['login'].' не найден в базе данных. Введите правильные данные или пройдите регистрацию';
+}*/
