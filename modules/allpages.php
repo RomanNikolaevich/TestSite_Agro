@@ -12,6 +12,8 @@ if(isset($_SESSION['user'])) {
 		header("Location: index.php?module=auth&page=exit");
 		exit();
 	}
+} elseif(isset($_COOKIE['autoauthhash'], $_COOKIE['autoauthid'])) {
+	//
 }
 
 //для неавторизированных
