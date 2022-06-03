@@ -6,12 +6,14 @@
 
             <br>
         <h3> Все существующие новости: </h3>
+        <?php if(!isset($_SESSION['blockeduser'])) { ?>
+        <!-- Start "Видимый блок новостей для незабаненых пользователей" -->
         <form action="" method="post">
         <?php while($row = mysqli_fetch_assoc($news)) { ?>
         <div class="card mb-3">
             <img class="card-img-top" src="../../../img/azot-2a.jpg" alt="Card image cap">
             <div class="card-body">
-                <?php if(!empty($_SESSION['access'])) { //только для админов видно ?>
+                <?php if(!empty($_SESSION['adminuser'])) { //только для админов видно ?>
                 <input type="checkbox" name="ids[]" value="<?php echo $row['id']; ?>">
                 <a class="btn btn-warning" href="/index.php?module=news&page=edit&id=<?php echo $row['id'];
                 ?>">Изменить</a>
@@ -28,10 +30,13 @@
             <hr>
 
         <?php }
-            if(!empty($_SESSION['access'])) { //только для админов видно ?>
+            if(!empty($_SESSION['adminuser'])) { //только для админов видно ?>
             <a class="btn btn-primary" href="/index.php?module=news&page=add">Добавить новость</a>
             <input class="btn btn-danger" type="submit" name="delete" value="Удалить отмеченные записи">
             <?php } ?>
         </form>
-
+        <!-- End "Видимый блок новостей для незабаненых пользователей" -->
+        <?php } else { ?>
+            <span style="color: red">К сожалению Ваш аккаунт был заблокирован, поэтому вы не сможете просматривать данные новости.</span>
+        <?php } ?>
 </div>

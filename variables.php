@@ -1,16 +1,18 @@
 <?php
 $module = $_GET['module'] ?? 'static';
 $page = $_GET['page'] ?? 'main';
+
+/* Авторизация по IP:
 $adminIp = '127.0.0.1';//'46.229.57.116';
 $adminVisability = $_SERVER['REMOTE_ADDR'] === $adminIp;
-
 if($_SERVER['REMOTE_ADDR'] !== $adminIp && $page === 'login') {
 	$page = '404';
-}
+}*/
 
 $modulePath = __DIR__.'/modules/'.$module.'/'.$page.'.php';
 $pagePath = __DIR__.'/skins/'.Core::$SKIN.'/'.$module.'/'.$page.'.tpl';
 
+//file_exists — Проверяет существование указанного файла или каталога
 if(!file_exists($modulePath)) {
 	$modulePath = __DIR__.'/modules/errors/404.php';
 	$pagePath = __DIR__.'/skins/'.Core::$SKIN.'/errors/404.tpl';

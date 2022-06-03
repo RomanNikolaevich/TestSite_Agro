@@ -11,32 +11,19 @@
  */
 
 ?>
-<!--Форма ввода комментариев:-->
+<!--Форма ввода отзывов:-->
 <div class="container mt-4">
 	<div class="row">
 		<div class="form-group">
 			<h2>ОТЗЫВЫ</h2>
 			<h5>Если Вы остались довольны услугами <span>"AGRO.UNITED"</span> или вам что-то не понравилось,
-				то можете оставить свой комметарий</h5>
+				то можете оставить свой отзыв</h5>
+            <?php if(isset($_SESSION['user'])) { ?>
+            <!-- Start "Видимый блок отзывов для авторизированных пользователей" -->
             <?php if (!isset($_SESSION['commentOk'])) { ?>
 				<form action="" method="post">
-                    <?php if (empty($_SESSION['username'])) { ?> <!--блок коментатора-->
-						<input type="text" class="form-control" name="username" id="loginReg"
-							   value="<?= htmlspecialchars($_POST['username'] ?? '');?>"
-							   placeholder="Введите логин *"><br>
-                        <?php if (!empty($errors['username'])) { ?>
-							<span style="color:red"><?=$errors['username']?></span><br>
-                            <?php } ?>
-                        <?php } else { ?> <!--заканчивается 1 блок условие "если не зарегистрирован"-->
-						<input type="text" class="form-control" name="username" id="disabledTextInput"
-							   placeholder="<?= htmlspecialchars($_SESSION['username']); ?>" disabled><br>
-						<p style="font-size:12px;">Для смены пользователя нажмите:
-							<button class="btn btn-suc" name="relogin" type="submit">Перезайти</button>
-						</p>
-                        <?php } ?> <!--заканчивается 2 блок условие "если зарегистрирован"-->
-					<p></p>
 					<textarea class="form-control" name="comment"
-							  placeholder="Оставьте свой комментарий *"></textarea><br>
+							  placeholder="Оставьте свой отзыв *"></textarea><br>
                     <?php if (!empty($errors['comment'])): ?>
 						<span style="color:red"><?=$errors['comment']?></span><br>
                     <?php endif ?>
@@ -45,13 +32,23 @@
 				</form>
                 <?php } else {
                 unset($_SESSION['commentOk']); ?>
-				<div>Спасибо за оставленный комментарий!</div>
+				<div>Спасибо за Ваш отзыв!</div>
                 <?php } ?>
 			<br>
+            <!-- End "Видимый блок отзывов для авторизированных пользователей" -->
+            <?php } else { ?>
+                <span>Отзывы могут оставлять только зарегистрированные
+                    пользователи.</span><br>
+                <span>Для регистрации перейдите по ссылке: </span><a style=" text-decoration: none; color: red;"
+                      href="/index.php?module=auth&page=regin">Регистрация</a><br>
+                <span>если вы уже зарегистрированы, то пройдите авторизацию:</span>
+                <a style=" text-decoration: none; color: red;"
+                   href="/index.php?module=auth&page=login">Авторизация</a><br>
+            <?php } ?>
 		</div>
 	</div>
 </div>
-<!--Вывод комментариев из БД на экран:-->
+<!--Вывод отзывов из БД на экран:-->
 <div class="container mt-4">
 	<div class="row">
 		<div class="col">
@@ -59,20 +56,51 @@
 			<div class="comment-body">
 				<p>
                     <?=$commentCount
-                        ? 'Всего '.$commentCount.' коментариев:<br>'
-                        : 'Комментариев пока еще нет, вы будете первым';?>
+                        ? 'Всего '.$commentCount.' отзывов:<br>'
+                        : 'Отзывов пока еще нет, вы будете первым';?>
 				</p>
 				<div>
                     <?php foreach ($comments as $comment):?>
-						<div> <!--Блок вывода комментариев из БД:-->
-							# <?php
-                            if ($currentCommentNumber > 0) {
-                                echo $currentCommentNumber--;
-                            } ?> |
-							user: <u><?= htmlspecialchars($comment['name'])?></u> |
-							date: <u><?= $comment['date']?></u> | : <br>
-							<i><?= nl2br(htmlspecialchars($comment['text']));?></i><br>
+                        <!--Start "Блок вывода отзывов из БД:"-->
+						<div>
+                            <!--Start: Общий просмотр "Одобренные отзывы"-->
+                            <?php if($comment['active'] == 1) { ?>
+                                # <?php //порядковый номер отзыва
+                                if ($currentCommentNumber > 0) {
+                                    echo $currentCommentNumber--;
+                                } ?> |
+                                user: <u><?= htmlspecialchars($comment['name'])?></u> |
+                                date: <u><?= $comment['date']?></u> | :
+                                <?php if(isset($_SESSION['adminuser'])) { ?>
+                                <span style="color: green">отзыв одобрен</span><br>
+                                 <?php } ?>
+                                <i><?= nl2br(htmlspecialchars($comment['text']));?></i><br>
+                            <?php }
+                            //End: Общий просмотр "Одобренные отзывы"
+							//Start: Доступ админа "Скрытые отзывы"
+                             else {
+								  if(isset($_SESSION['adminuser'])) { ?>
+                                # <?php //порядковый номер отзыва
+                                if ($currentCommentNumber > 0) {
+                                    echo $currentCommentNumber--;
+                                } ?> |
+                                user: <u><?= htmlspecialchars($comment['name'])?></u> |
+                                date: <u><?= $comment['date']?></u> | :
+                                <span style="color: red">отзыв скрыт</span><br>
+                                <i><?= nl2br(htmlspecialchars($comment['text']));?></i><br>
+                             <?php } ?>
+                        <?php } ?> <br>
+                            <!--End: "Блок админа: вывод уведомления о статусе отзыва"-->
 						</div>
+                        <!--End "Блок вывода отзывов из БД"-->
+                        <!--Start "Блок админов"-->
+                        <?php if(isset($_SESSION['adminuser'])){?>
+                                <form method="post" action="/index.php?module=comments&action=main&id=<?php echo $comment['id'];?>">
+                                    <input class="btn btn-secondary" name="hidecomment" type="submit" value="Скрыть">
+                                    <input class="btn btn-success" name="showcomment" type="submit" value="Одобрить">
+                                </form>
+                        <?php }?>
+                        <!--End "Блок админов"-->
 						<p></p>
                     <?php endforeach; ?>
 				</div>
@@ -81,6 +109,7 @@
 		</div>
 	</div>
 </div>
+
 <!--Пагинатор:-->
 <div class="container mt-4">
 	<div class="row">

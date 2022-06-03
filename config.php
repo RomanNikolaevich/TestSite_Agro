@@ -10,7 +10,7 @@ class Core {
     static $DB_LOGIN   = 'roman';
     static $DB_PASS    = 'yAjD8lu4SHe';
     static $DB_NAME    = 'roman';
-    static $DOMAIN     = 'https://roman.school-php.com/';
+    static $DOMAIN     = 'http://testphpagro1.ua/';//'https://roman.school-php.com/';
 }
 
 /*define('CREATED',2022);

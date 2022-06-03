@@ -9,3 +9,95 @@
 		`hash`     = CBw6bsStOikfc`
 		You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`' at line 6FILE: E:\INET\OpenServer\domains\testphpagro1.ua\modules\auth\regin.php LINE: 62
 
+2022-06-02 03:48:58  QUERY: 
+		SELECT *
+		FROM `users`
+		WHERE `login`      = 'Roman',
+			AND `password` = 'CB/hUFa6knf6s',
+			AND `active`   = 1
+			LIMIT 1
+	You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '
+			AND `password` = 'CB/hUFa6knf6s',
+			AND `active`   = 1
+			LIMIT 1' at line 3FILE: E:\INET\OpenServer\domains\testphpagro1.ua\modules\auth\login.php LINE: 14
+
+2022-06-02 13:31:11  QUERY: 
+		SELECT *
+		FROM `users`
+		WHERE `login`      = 'Roman',
+			AND `password` = 'CB/hUFa6knf6s',
+			AND `active`   = 1
+			LIMIT 1
+	You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '
+			AND `password` = 'CB/hUFa6knf6s',
+			AND `active`   = 1
+			LIMIT 1' at line 3FILE: E:\INET\OpenServer\domains\testphpagro1.ua\modules\auth\login.php LINE: 14
+
+2022-06-02 13:56:01  QUERY: 
+		SELECT *
+		FROM `users`
+		WHERE `login`      = 'Roman',
+			AND `password` = 'CB/hUFa6knf6s'
+			AND `active`   = 1
+			LIMIT 1
+	You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '
+			AND `password` = 'CB/hUFa6knf6s'
+			AND `active`   = 1
+			LIMIT 1' at line 3FILE: E:\INET\OpenServer\domains\testphpagro1.ua\modules\auth\login.php LINE: 14
+
+2022-06-02 13:57:49  QUERY: 
+		SELECT *
+		FROM `users`
+		WHERE `login`      = 'Roman',
+			AND `password` = 'CB/hUFa6knf6s'
+			AND `active`   = 1
+			LIMIT 1
+	You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '
+			AND `password` = 'CB/hUFa6knf6s'
+			AND `active`   = 1
+			LIMIT 1' at line 3FILE: E:\INET\OpenServer\domains\testphpagro1.ua\modules\auth\login.php LINE: 14
+
+2022-06-02 14:01:11  QUERY: 
+		SELECT *
+		FROM `users`
+		WHERE `login`      = 'Roman',
+			& `password` = 'CB/hUFa6knf6s',
+			& `active`   = 1
+			LIMIT 1
+	You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '
+			& `password` = 'CB/hUFa6knf6s',
+			& `active`   = 1
+			LIMIT 1' at line 3FILE: E:\INET\OpenServer\domains\testphpagro1.ua\modules\auth\login.php LINE: 14
+
+2022-06-02 14:02:46  QUERY: 
+		SELECT *
+		FROM `users`
+		WHERE `login`      = 'Roman',
+			&& `password` = 'CB/hUFa6knf6s',
+			&& `active`   = 1
+			LIMIT 1
+	You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '
+			&& `password` = 'CB/hUFa6knf6s',
+			&& `active`   = 1
+			LIMIT 1' at line 3FILE: E:\INET\OpenServer\domains\testphpagro1.ua\modules\auth\login.php LINE: 14
+
+2022-06-03 14:06:21  QUERY: 
+        SELECT *
+        FROM `users`
+        WHERE `id` = 41
+        AND `` = 5
+        LIMIT 1
+    Unknown column '' in 'where clause'FILE: E:\INET\OpenServer\domains\testphpagro1.ua\modules\allpages.php LINE: 24
+
+2022-06-03 14:06:23  QUERY: 
+        SELECT *
+        FROM `users`
+        WHERE `id` = 41
+        AND `` = 5
+        LIMIT 1
+    Unknown column '' in 'where clause'FILE: E:\INET\OpenServer\domains\testphpagro1.ua\modules\allpages.php LINE: 24
+
+2022-06-03 16:20:43  QUERY: SELECT * FROM `comments` SET `name`='', `text`=''You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SET `name`='', `text`=''' at line 1FILE: E:\INET\OpenServer\domains\testphpagro1.ua\modules\comments\main.php LINE: 53
+
+2022-06-03 16:20:45  QUERY: SELECT * FROM `comments` SET `name`='', `text`=''You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SET `name`='', `text`=''' at line 1FILE: E:\INET\OpenServer\domains\testphpagro1.ua\modules\comments\main.php LINE: 53
+

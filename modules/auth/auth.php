@@ -1,6 +1,6 @@
 <?php
 if (!isset($_SESSION['user']) || $_SESSION['user']['access'] != 1) {
-	exit();
+	//exit();
 }
 
 if(isset($_POST['login'], $_POST['pass'], $_POST['do_login'])) {

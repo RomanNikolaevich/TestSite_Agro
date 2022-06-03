@@ -24,6 +24,7 @@ SELECT *
 FROM `news`
 ORDER BY `id` DESC
 ");
+$row = mysqli_fetch_assoc($news);
 
 //делаем проверку сессии
 if(isset($_SESSION['info'])) {

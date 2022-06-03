@@ -6,39 +6,60 @@
 //Информацию из форм отправляем в БД:
 if (isset($_POST['do_signup'])) {
     $errors = [];
-    $username = $_SESSION['username'] ?? $_POST['username'] ?? '';
+	$username = $_SESSION['user']['login'];
     $comment = $_POST['comment'] ?? '';
 
-    if (empty($username)) {
-        $errors['username'] = 'Вы не заполнили логин';
-    }
     if (empty($comment)) {
-        $errors['comment'] = 'Вы не заполнили комментарий';
+        $errors['comment'] = 'Вы не заполнили отзыв';
     } elseif (mb_strlen($comment) < 50) {
-        $errors['comment'] = 'Длинна комментария меньше 50 символов!';
+        $errors['comment'] = 'Длинна отзыва меньше 50 символов!';
     }
 
+	//Защита от спама со ссылками:
      validateName($comment);
 
     if (!count($errors)) {
-        $username = mysqli_real_escape_string($link, $username);
-        if (empty($_SESSION['username'])) {
-            $_SESSION['username'] = $username;
-        }
-        $comment = mysqli_real_escape_string($link, $comment);
+        $username = mres($username);
+        $comment = mres($comment);
         $query = "INSERT INTO `comments` SET `name`='$username', `text`='$comment'";
-        mysqli_query($link, $query) or exit(mysqli_error($link));
+        q($query);
         $_SESSION['commentOk'] = 'OK';
         header("Location: /index.php?module=comments&page=main");
         exit();
     }
 }
-if (isset($_POST['relogin'])) {
-    unset ($_SESSION['username']);
-    header("Location: /index.php?module=comments&page=main");
+
+//Админские функции:
+//Скрыть отзыв:
+if (isset($_POST['hidecomment'])){
+	q("
+        UPDATE `comments` SET
+       `active` = 0
+		WHERE `id` = ".(int)$_GET['id']."
+    ");
+	header("Location: /index.php?module=comments&page=main");
 }
 
-//пагинатор - поверка, есть ли GET запрос
+//Разрешить отзыв:
+if (isset($_POST['showcomment'])){
+	q("
+        UPDATE `comments` SET
+       `active` = 1
+		WHERE `id` = ".(int)$_GET['id']."
+    ");
+	header("Location: /index.php?module=comments&page=main");
+}
+//Проверка статуса отзыва:
+/*$statuscomment = q("SELECT * FROM `comments` SET `name`='$username', `text`='$comment'");
+if(isset($_GET['hash'], $_GET['id'])) {
+
+	$info = 'Вы активированы на сайте';
+} else {
+	$info = 'Вы прошли по неверной ссылке';
+}*/
+
+//Блок Пагинатора:
+//Поверка, есть ли GET запрос
 $pageno = $_GET['pageno'] ?? 1;
 // LIMIT задаёт лимит записей
 $limit = 5;
@@ -47,11 +68,11 @@ $offset = ($pageno - 1) * $limit;
 
 $comments = getComments($link, $limit, $offset);
 
-//счетчик комментариев:
-$commentResult = q("SELECT * FROM `comments`"); //запрос к БД комментов
+//счетчик отзывов:
+$commentResult = q("SELECT * FROM `comments` WHERE `active` = 1"); //запрос к БД отзывов
 $commentCount = mysqli_num_rows($commentResult); // Получаем количество строк в БД
 
 //Считаем количество страниц:
 $totalPages = ceil($commentCount / $limit);
-//Для расчета нумерации комментариев с учетом смены страниц пагинатором.
+//Для расчета нумерации отзывов с учетом смены страниц пагинатором.
 $currentCommentNumber = $commentCount - $offset;

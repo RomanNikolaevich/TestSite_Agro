@@ -7,6 +7,7 @@ if(isset($_POST['login'], $_POST['email'], $_POST['password'])) {
 	$login = $_POST['login'];
 	$password = $_POST['password'];
 	$email = $_POST['email'];
+	$age = $_POST['age'];
 	$query = "SELECT * FROM users WHERE login='$login'";
 
 	$user = mysqli_fetch_assoc(q($query));
@@ -29,6 +30,11 @@ if(isset($_POST['login'], $_POST['email'], $_POST['password'])) {
 		$errors['email'] = 'Вы не заполнили email';
 	}
 
+	if(empty($age)) {
+		$errors['age'] = 'Вы не заполнили ваш возраст';
+	} elseif ($age < 1 || $age > 150) {
+		$errors['age'] = 'Введите правильный возраст';
+	}
 	//Делаем проверку логина и email на уникальность:
 	if (!count($errors)) {
 		$res = q("
@@ -63,16 +69,18 @@ if(isset($_POST['login'], $_POST['email'], $_POST['password'])) {
 		");// or exit(mysqli_error($link)); //вывод ошибок БД нам не нужен - есть в функции
 			$id = mysqli_insert_id($link);
 
-			$_SESSION['regok'] = 'OK';
 			class_Mail::$to = $_POST['email'];
 			class_Mail::$subject = 'Вы зарегистрировались на сайте';
 			class_Mail::$text = '
-			...Если вы не регистрировались, то не отвечайте на данное письмо. Если это все-таки
-			вы регистрировались, то пройдите по ссылке для активации вашего аккаунта:
-			'.Core::$DOMAIN.'index.php?module?cab&page=activate&id='.$id.'hash='.myHash($_POST['login'].$_POST['age']).'
+			Добрый день. 
+			Ваш почтовый ящик был указан во время регистрации на сайте roman.school-php.com
+			Если вы не регистрировались, то не отвечайте на данное письмо. Если это все-таки
+			вы регистрировались, то для активации вашего аккаунта пройдите по ссылке :
+			'.Core::$DOMAIN.'index.php?module=auth&page=activate&id='.$id.'&hash='.myHash($_POST['login'].$_POST['age']).'
 			';
 			class_Mail::send();
-			header("Location: /index.php?module=auth&page=activate");
+			$_SESSION['regok'] = 'OK';
+			header("Location: /index.php?module=auth&page=regin");
 			//$_SESSION['access'] = 1;
 			//$_SESSION['login'] = $login;
 			//setcookie('access', 1, time() + 3600, '/');

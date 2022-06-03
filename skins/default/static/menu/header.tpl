@@ -13,19 +13,19 @@
 	<div class="item"><a href="index.php?module=comments&page=main">comments</a></div>
 	<div class="item"><a href="index.php?module=game&page=game">games</a></div>
 	<?php
-	if($adminVisability) {
-		if(empty($_SESSION['access'])) { ?>
+	//if($adminVisability) {
+		if(empty($_SESSION['user'])) { ?>
 			<div class="item"><a href="index.php?module=auth&page=login">login</a></div>
 			<?php
 		} ?>
 		<?php
-		if(!empty($_SESSION['access'])) { ?>
+		if(!empty($_SESSION['user'])) { ?>
 			<div class="item"><a href="index.php?module=auth&page=logout">logout</a></div>
 			<?php
-			if(!empty($_SESSION['login'])) {
-				echo 'welcome '.$_SESSION['login'];
+			if(!empty($_SESSION['user'])) {
+				echo 'welcome '.$_SESSION['user']['login'];
 			}
-		}
+		//}
 	} ?>
 </nav>
 <div class="container-logo"><img src="img/logo.png" alt="logo">
