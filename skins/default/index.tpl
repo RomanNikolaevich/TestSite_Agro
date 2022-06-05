@@ -6,22 +6,22 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Roma Agro test site</title>
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/normalize.css" rel="stylesheet"/>
-  <link href="css/style.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Roma Agro test site</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/normalize.css" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
 <div class="block">
-  <?php include './skins/'.Core::$SKIN.'/static/menu/header.tpl'; ?>
-  <?php include $pagePath; ?>
+	<?php include './skins/' . Core::$SKIN . '/static/menu/header.tpl'; ?>
+	<?php include $_GET['module'] . '/' . $_GET['page'] . '.tpl'; ?>
 
-  <div class="conteiner-content">
-    <?php include './skins/'.Core::$SKIN.'/static/menu/footer.tpl'; ?>
-  </div>
+    <div class="conteiner-content">
+		<?php include './skins/' . Core::$SKIN . '/static/menu/footer.tpl'; ?>
+    </div>
 </div>
 </body>
 </html>

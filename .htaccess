@@ -5,7 +5,21 @@ php_flag magic_quotes_gpc off
 php_flag magic_quotes_rubtime off
 php_flag register_globals off
 
-#RewriteEngine On
+RewriteEngine On
+
+#Исключения, которые не обрабатываются ЧПУ:
+RewriteCond %{REQUEST_URI} !^/admin
+RewriteCond %{REQUEST_URI} !^/forum
+RewriteCond %{REQUEST_URI} !^/ckeditor
+
+#Стандартное поведение, что делать с папками и дирикториями:
+RewriteCond %{REQUEST_URI} !-f
+RewriteCond %{REQUEST_URI} !-d
+
+#Автозамена:
+RewriteRule ^(.*)$ index.php?route=$1 [L,QSA]
+
+
 #RewriteBase /
 #RewriteCond %{REQUEST_URI} !\.(js|css|ico|jpg|png)$
 #RewriteRule .+ index.php
