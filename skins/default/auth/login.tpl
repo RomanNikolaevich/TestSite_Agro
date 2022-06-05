@@ -7,8 +7,9 @@
 	<div class="row">
 		<div class="col">
 			<!-- Форма авторизации -->
-			<?php if(empty($_SESSION['user'])) {echo @$error; ?>
+			<?php if(empty($_SESSION['user'])) {?>
 			<h2>Форма входа</h2>
+                <h4 style="color: red"><?php echo @$error; ?></h4>
 			<form method="post">
 				Логин: <input type="text" class="form-control" name="login" id="login" placeholder="Введите логин"
 					   value="<?php echo $_POST['login'] ?? '' ?>" required><br>

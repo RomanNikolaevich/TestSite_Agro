@@ -11,6 +11,8 @@ class Core {
     static $DB_PASS    = 'yAjD8lu4SHe';
     static $DB_NAME    = 'roman';
     static $DOMAIN     = 'http://testphpagro1.ua/';//'https://roman.school-php.com/';
+	//static $ADMINACCESS = $_SESSION['user']['access']==2;
+	//static $LOCKEDACCESS = $_SESSION['user']['access']==5;
 }
 
 /*define('CREATED',2022);

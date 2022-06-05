@@ -11,7 +11,7 @@
                             <img class="card-img-top" src="../../../img/azot-1.jpg" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <?php if(!empty($_SESSION['adminuser'])) { //только для админов видно ?>
+                                    <?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { //только для админов видно ?>
                                     <input type="checkbox" name="ids[]" value="<?php echo $row['id'];
                                     ?>">  <?php } echo $row['title']; ?>
                                 </h5>
@@ -20,7 +20,7 @@
                             <div class="card-footer">
                                 <h5 class="text-center">Цена: <?php echo $row['price']; ?> грн.</h5>
                             </div>
-                            <?php if(!empty($_SESSION['adminuser'])) { //только для админов видно ?>
+                            <?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { //только для админов видно ?>
                             <div class="card-footer">
                                 <a class="btn btn-warning" href="/index.php?module=goods&page=edit&id=<?php echo $row['id'];
                                 ?>">Изменить</a>
@@ -35,7 +35,7 @@
         </div>
     </div>
 </form>
-<?php if(!empty($_SESSION['adminuser'])) { //только для админов видно ?>
+<?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { //только для админов видно ?>
     <div class="product col-md-4 col-sm-4 col-xs-12">
         <button type="button" class="btn btn-success" onclick="window.location.href =
             '/index.php?module=goods&page=add';">Добавить товар</button>

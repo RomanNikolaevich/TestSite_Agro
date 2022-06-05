@@ -71,7 +71,7 @@
                                 } ?> |
                                 user: <u><?= htmlspecialchars($comment['name'])?></u> |
                                 date: <u><?= $comment['date']?></u> | :
-                                <?php if(isset($_SESSION['adminuser'])) { ?>
+                                <?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { ?>
                                 <span style="color: green">отзыв одобрен</span><br>
                                  <?php } ?>
                                 <i><?= nl2br(htmlspecialchars($comment['text']));?></i><br>
@@ -79,7 +79,7 @@
                             //End: Общий просмотр "Одобренные отзывы"
 							//Start: Доступ админа "Скрытые отзывы"
                              else {
-								  if(isset($_SESSION['adminuser'])) { ?>
+								  if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { ?>
                                 # <?php //порядковый номер отзыва
                                 if ($currentCommentNumber > 0) {
                                     echo $currentCommentNumber--;
@@ -94,7 +94,7 @@
 						</div>
                         <!--End "Блок вывода отзывов из БД"-->
                         <!--Start "Блок админов"-->
-                        <?php if(isset($_SESSION['adminuser'])){?>
+                        <?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2){?>
                                 <form method="post" action="/index.php?module=comments&action=main&id=<?php echo $comment['id'];?>">
                                     <input class="btn btn-secondary" name="hidecomment" type="submit" value="Скрыть">
                                     <input class="btn btn-success" name="showcomment" type="submit" value="Одобрить">

@@ -39,7 +39,8 @@ function trimArray($elem) {
     if(!is_array($elem)) { //если это не массив
         $elem = trim($elem); //то мы его обработаем тримом
     } else {
-        $elem = array_map('trimAll', $elem); // делаем замыкание функции смой себя и каждый раз залазит глубже в массив
+        $elem = array_map('trimAll', $elem); // делаем замыкание функции самой себя и каждый раз
+		// залазит глубже в массив
     }
     return $elem; //массив не будем трогать
 }
@@ -65,8 +66,8 @@ function floatArray($elem) {
     return $elem; //массив не будем трогать
 }
 
-//Экранирует специальные символы в строке для использования в SQL-выражении,
-// используя текущий набор символов соединения
+/*Безопасность записываемой в БД информации. Экранирует специальные символы в строке для использования
+в SQL-выражении, используя текущий набор символов соединения*/
 function mres($elem) {
     global $link;
     if(!is_array($elem)) {
@@ -77,7 +78,8 @@ function mres($elem) {
     return $elem;
 }
 
-//Преобразует специальные символы в HTML-сущности
+/*Безопасность выводимой на экран информации (между echo и переменной ставим). Преобразует специальные
+символы в HTML-сущности*/
 function hsc($elem) {
     if(!is_array($elem)) {
         $elem = htmlspecialchars ($elem);
@@ -95,7 +97,7 @@ function getComments($link, int $limit, int $offset) {
     return $comments;
 }
 
-//блок спама через набор символов
+//блок фильтра спама (запрет использования ссылок)
 function validateName($comment) {
     global $errors;
     $badWords = '/\.com|\.ru|\.net|\.xyz|\.html|\.https|\.club|\.http|\.httр|\.httрs|\.url|\.org|\.by/i';
